@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quietly Tough — Try Stage One Free</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --warm-white: #FDFCFF;
+    --pale-grey: #F0EEF5;
+    --soft-lavender: #EDE8FB;
+    --body-text: #1C1A2E;
+    --deep-purple: #3D0F99;
+    --accent: #5E17EB;
+    --pink: #E91E8C;
+    --stone: #CBD4E6;
+    --mid-purple: #6B3FA0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--warm-white); color: var(--body-text); font-family: 'Lato', sans-serif; font-weight: 400; min-height: 100vh; overflow-x: hidden; }
+
+  /* ── SPLASH ── */
+  #splash { background: var(--warm-white); border-bottom: 1px solid var(--stone); min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 60px 28px; text-align: center; position: relative; }
+  #splash::before { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--stone) 0%, var(--accent) 40%, var(--pink) 100%); }
+  .splash-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 0.35em; text-transform: uppercase; color: var(--mid-purple); margin-bottom: 32px; }
+  .splash-title { font-family: 'Libre Baskerville', serif; font-size: clamp(36px, 7vw, 60px); font-weight: 400; color: var(--deep-purple); line-height: 1.1; letter-spacing: 0.02em; margin-bottom: 8px; }
+  .splash-title em { font-style: italic; color: var(--pink); }
+  .splash-subtitle { font-family: 'Libre Baskerville', serif; font-size: clamp(13px, 2.5vw, 16px); font-style: italic; color: var(--mid-purple); margin-bottom: 40px; letter-spacing: 0.05em; }
+  .splash-divider { width: 44px; height: 2px; background: var(--pink); margin: 0 auto 40px; }
+  .splash-intro { font-size: 16px; line-height: 1.85; color: #3a3a50; max-width: 560px; margin: 0 auto 40px; text-align: left; }
+  .splash-intro p { margin-bottom: 16px; }
+  .splash-intro p:last-child { margin-bottom: 0; }
+  .beta-note { background: var(--soft-lavender); border-left: 3px solid var(--pink); padding: 20px 24px; max-width: 560px; margin: 0 auto 40px; text-align: left; }
+  .beta-note-label { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--pink); margin-bottom: 8px; }
+  .beta-note p { font-family: 'Libre Baskerville', serif; font-style: italic; font-size: 15px; line-height: 1.7; color: var(--mid-purple); }
+  .begin-btn { border: 1px solid var(--deep-purple); color: var(--deep-purple); background: transparent; font-family: 'Lato', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; padding: 16px 40px; cursor: pointer; transition: all 0.2s; margin-bottom: 16px; }
+  .begin-btn:hover { background: var(--deep-purple); color: var(--warm-white); }
+  .splash-small { font-size: 11px; color: var(--stone); letter-spacing: 0.08em; }
+
+  /* ── APP SHELL ── */
+  #app { display: none; }
+  .top-bar { background: var(--warm-white); border-bottom: 1px solid var(--stone); padding: 0 24px; height: 52px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+  .top-logo { font-family: 'Libre Baskerville', serif; font-style: italic; font-size: 16px; color: var(--deep-purple); cursor: pointer; }
+  .top-logo em { color: var(--pink); }
+  .starter-badge { font-size: 9px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--pink); background: var(--soft-lavender); padding: 3px 10px; border-radius: 2px; }
+  .save-status { font-size: 11px; color: var(--accent); opacity: 0; transition: opacity 0.3s; }
+  .save-status.show { opacity: 1; }
+  .nav-bar { background: var(--pale-grey); border-bottom: 1px solid var(--stone); padding: 0 24px; display: flex; gap: 4px; }
+  .nav-btn { background: none; border: none; border-bottom: 2px solid transparent; padding: 12px 16px; font-family: 'Lato', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid-purple); cursor: pointer; transition: all 0.2s; }
+  .nav-btn:hover, .nav-btn.active { border-bottom-color: var(--accent); color: var(--accent); }
+
+  /* ── CONTENT ── */
+  .content-area { max-width: 720px; margin: 0 auto; padding: 48px 28px 80px; }
+
+  /* Stage header */
+  .stage-header { text-align: center; padding: 48px 0 40px; border-bottom: 1px solid var(--stone); margin-bottom: 48px; }
+  .stage-number { font-family: 'Libre Baskerville', serif; font-size: 80px; color: rgba(61,15,153,0.08); font-weight: 700; line-height: 1; margin-bottom: 8px; }
+  .stage-tag { font-size: 9px; font-weight: 700; letter-spacing: 0.4em; text-transform: uppercase; color: var(--accent); background: var(--soft-lavender); border: 1px solid var(--stone); padding: 6px 16px; display: inline-block; margin-bottom: 16px; }
+  .stage-title { font-family: 'Libre Baskerville', serif; font-size: clamp(36px, 6vw, 52px); font-weight: 700; color: var(--deep-purple); margin-bottom: 12px; }
+  .stage-subtitle { font-family: 'Libre Baskerville', serif; font-style: italic; font-size: 18px; color: var(--mid-purple); }
+
+  /* Prose */
+  .prose p { font-size: 17px; line-height: 1.85; color: #3a3a50; margin-bottom: 20px; }
+  .prose p:last-child { margin-bottom: 0; }
+  .line-break { display: block; }
+
+  /* Reflection block */
+  .reflection-block { background: var(--soft-lavender); border-left: 3px solid var(--pink); padding: 32px 36px; margin: 40px 0; }
+  .reflection-title { font-size: 10px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--pink); margin-bottom: 8px; }
+  .reflection-intro { font-family: 'Libre Baskerville', serif; font-style: italic; font-size: 15px; color: var(--mid-purple); margin-bottom: 28px; line-height: 1.6; }
+  .prompt-item { margin-bottom: 28px; }
+  .prompt-number { font-size: 9px; font-weight: 700; letter-spacing: 0.2em; color: var(--pink); margin-bottom: 6px; }
+  .prompt-question { font-family: 'Libre Baskerville', serif; font-size: 17px; color: var(--deep-purple); margin-bottom: 10px; line-height: 1.5; }
+
+  /* Try This block */
+  .try-this-block { background: var(--pale-grey); border-left: 3px solid var(--pink); padding: 32px 36px; margin: 40px 0; position: relative; }
+  .try-this-tag { font-size: 9px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--pink); margin-bottom: 12px; display: block; }
+  .try-this-title { font-family: 'Libre Baskerville', serif; font-size: 24px; font-weight: 700; color: var(--deep-purple); margin-bottom: 16px; }
+  .try-this-intro { font-size: 15px; color: var(--mid-purple); line-height: 1.8; margin-bottom: 28px; font-style: italic; }
+  .step-block { margin-bottom: 24px; }
+  .step-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 6px; }
+  .step-desc { font-size: 15px; color: var(--body-text); margin-bottom: 8px; line-height: 1.6; }
+
+  /* Chapter divider */
+  .chapter-divider { display: flex; align-items: center; gap: 16px; margin: 56px 0 32px; }
+  .chapter-line { flex: 1; height: 1px; background: var(--stone); }
+  .chapter-label { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mid-purple); white-space: nowrap; }
+  .chapter-title { font-family: 'Libre Baskerville', serif; font-size: clamp(26px, 5vw, 38px); font-weight: 700; color: var(--deep-purple); margin-bottom: 8px; }
+  .chapter-subtitle { font-family: 'Libre Baskerville', serif; font-style: italic; font-size: 17px; color: var(--mid-purple); margin-bottom: 32px; }
+
+  /* Closing nudge */
+  .closing-nudge { border-top: 1px solid var(--stone); border-bottom: 1px solid var(--stone); background: var(--soft-lavender); padding: 24px 28px; margin: 40px 0; }
+  .closing-nudge-label { font-size: 9px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--pink); margin-bottom: 8px; }
+  .closing-nudge p { font-family: 'Libre Baskerville', serif; font-style: italic; font-size: 16px; color: var(--mid-purple); line-height: 1.7; }
+
+  /* Stage close */
+  .stage-close { background: var(--soft-lavender); border-left: 4px solid var(--pink); padding: 48px 40px; margin: 56px 0 0; }
+  .stage-close-label { font-size: 9px; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--pink); margin-bottom: 16px; }
+  .stage-close h2 { font-family: 'Libre Baskerville', serif; font-size: 28px; font-weight: 700; color: var(--deep-purple); margin-bottom: 24px; }
+  .stage-close-prose { font-family: 'Libre Baskerville', serif; font-style: italic; font-size: 17px; color: var(--mid-purple); line-height: 1.9; }
+  .stage-close-prose p { margin-bottom: 16px; }
+  .highlight { color: var(--pink); font-style: normal; }
+
+  /* Response areas */
+  .response-area, .response-area-dark { width: 100%; min-height: 100px; border: none; border-bottom: 1px solid var(--stone); background: transparent; font-family: 'Lato', sans-serif; font-size: 15px; color: var(--body-text); resize: vertical; padding: 12px 4px; outline: none; line-height: 1.7; }
+  .response-area:focus, .response-area-dark:focus { border-bottom-color: var(--pink); }
+  .response-area::placeholder, .response-area-dark::placeholder { color: var(--stone); font-style: italic; }
+  .response-area-dark { color: var(--body-text); }
+  .table-exercise { margin: 16px 0; overflow-x: auto; }
+  .exercise-table { width: 100%; border-collapse: collapse; }
+  .exercise-table th { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); padding: 10px 12px; border-bottom: 1px solid var(--stone); text-align: left; background: var(--pale-grey); }
+  .exercise-table td { border-bottom: 1px solid var(--stone); padding: 4px; vertical-align: top; }
+  .table-cell-input { width: 100%; min-height: 60px; border: none; background: transparent; font-family: 'Lato', sans-serif; font-size: 14px; color: var(--body-text); resize: none; padding: 8px; outline: none; }
+
+  /* Progress */
+  .progress-wrap { padding: 8px 24px; background: var(--pale-grey); border-bottom: 1px solid var(--stone); display: flex; align-items: center; gap: 12px; }
+  .progress-bar { flex: 1; height: 2px; background: var(--soft-lavender); }
+  .progress-fill { height: 100%; background: var(--pink); transition: width 0.4s ease; }
+  .progress-label { font-size: 10px; color: var(--mid-purple); letter-spacing: 0.05em; white-space: nowrap; }
+
+  /* Tab cards */
+  .tab-stage-label { font-size: 9px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--pink); margin: 40px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--stone); font-weight: 700; }
+  .tab-exercise-card { background: var(--soft-lavender); border-left: 3px solid var(--accent); padding: 24px 28px; margin-bottom: 20px; border-radius: 0 4px 4px 0; }
+  .tab-exercise-meta { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; color: var(--deep-purple); text-transform: uppercase; margin-bottom: 6px; }
+  .tab-exercise-context { font-family: 'Libre Baskerville', serif; font-style: italic; font-size: 14px; color: var(--mid-purple); margin-bottom: 20px; line-height: 1.6; }
+  .tab-exercise-step { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 6px; }
+  .tab-exercise-card .response-area { background: rgba(255,255,255,0.6); }
+  .tab-exercise-card .prompt-item { margin-bottom: 24px; }
+
+  /* Journal view wrapper */
+  .journal-view { max-width: 720px; margin: 0 auto; padding: 48px 28px 80px; }
+  .journal-header { border-bottom: 1px solid var(--stone); padding-bottom: 28px; margin-bottom: 40px; }
+  .journal-header h2 { font-family: 'Libre Baskerville', serif; font-size: 28px; font-weight: 700; color: var(--deep-purple); margin-bottom: 8px; }
+  .journal-header p { font-size: 15px; color: var(--mid-purple); line-height: 1.7; }
+
+  /* ── CLOSING SCREEN ── */
+  #section-complete { display: none; }
+  .complete-screen { max-width: 640px; margin: 0 auto; padding: 64px 28px 80px; text-align: center; }
+  .complete-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--pink); margin-bottom: 24px; }
+  .complete-title { font-family: 'Libre Baskerville', serif; font-size: clamp(28px, 5vw, 42px); font-weight: 700; color: var(--deep-purple); line-height: 1.2; margin-bottom: 32px; }
+  .complete-divider { width: 44px; height: 2px; background: var(--pink); margin: 0 auto 32px; }
+  .complete-prose { font-size: 16px; line-height: 1.85; color: #3a3a50; text-align: left; margin-bottom: 40px; }
+  .complete-prose p { margin-bottom: 16px; }
+  .complete-quote { background: var(--soft-lavender); border-left: 3px solid var(--accent); padding: 24px 28px; margin: 0 0 40px; text-align: left; }
+  .complete-quote p { font-family: 'Libre Baskerville', serif; font-style: italic; font-size: 18px; color: var(--deep-purple); line-height: 1.6; margin-bottom: 8px; }
+  .complete-quote cite { font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); font-style: normal; }
+  .what-next { background: var(--pale-grey); padding: 32px; margin: 0 0 40px; text-align: left; }
+  .what-next-label { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
+  .what-next-grid { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 24px; }
+  .what-next-item { display: flex; align-items: flex-start; gap: 8px; flex: 1; min-width: 180px; }
+  .what-next-item span { color: var(--pink); font-weight: 700; font-size: 16px; line-height: 1.4; flex-shrink: 0; }
+  .what-next-item p { font-size: 14px; line-height: 1.6; color: #3a3a50; }
+  .bundle-card { background: var(--soft-lavender); border: 1px solid var(--stone); padding: 36px 32px; margin: 0 0 40px; }
+  .bundle-badge { display: inline-block; background: var(--pink); color: #fff; font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; padding: 4px 12px; margin-bottom: 16px; }
+  .bundle-title { font-family: 'Libre Baskerville', serif; font-size: 22px; font-weight: 700; color: var(--deep-purple); margin-bottom: 8px; }
+  .bundle-desc { font-size: 14px; color: #3a3a50; line-height: 1.7; margin-bottom: 24px; }
+  .bundle-price { font-family: 'Libre Baskerville', serif; font-size: 36px; font-weight: 700; color: var(--deep-purple); margin-bottom: 4px; }
+  .bundle-price-note { font-size: 13px; color: #888; margin-bottom: 24px; }
+  .bundle-includes { font-size: 13px; color: #3a3a50; line-height: 1.9; margin-bottom: 24px; text-align: left; }
+  .bundle-btn { display: block; background: var(--accent); color: #fff; font-family: 'Lato', sans-serif; font-size: 15px; font-weight: 700; letter-spacing: 0.04em; padding: 18px 32px; text-decoration: none; text-align: center; transition: background 0.2s; }
+  .bundle-btn:hover { background: var(--deep-purple); }
+  .individual-links { font-size: 13px; color: var(--mid-purple); margin-top: 16px; }
+  .individual-links a { color: var(--accent); text-decoration: underline; }
+  .export-btn { border: 1px solid var(--accent); color: var(--accent); background: transparent; font-family: 'Lato', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; padding: 10px 24px; cursor: pointer; transition: all 0.2s; }
+  .export-btn:hover { background: var(--accent); color: var(--warm-white); }
+
+  @keyframes fadeUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════ SPLASH ══════════════════ -->
+<div id="splash">
+  <p class="splash-eyebrow">Quietly Tough &nbsp;·&nbsp; The Leadership Series &nbsp;·&nbsp; Book One</p>
+  <h1 class="splash-title">The Art of<br><em>Calm Strength</em></h1>
+  <p class="splash-subtitle">Practice Guide — Try Stage One Free</p>
+  <div class="splash-divider"></div>
+
+  <div class="splash-intro">
+    <p>This is a free taster of the Quietly Tough Practice Guide — the interactive companion to <em>The Art of Calm Strength</em>.</p>
+    <p>You'll work through the complete first stage — Fog — at your own pace, in your own words. Everything you write saves automatically to your device. Nothing leaves your machine.</p>
+    <p>If it resonates, the full guide — all six stages, 18 chapters, and 148 guided prompts — is available as part of the complete Quietly Tough bundle.</p>
+  </div>
+
+  <div class="beta-note">
+    <div class="beta-note-label">A note from Audrey</div>
+    <p>This interactive format is new — and I'm genuinely excited about it. I wanted to let you experience it before you decide whether to invest in the full version. Work through Stage One honestly, see how it feels, and then decide. That feels like the right way to do this.</p>
+  </div>
+
+  <button class="begin-btn" onclick="startApp()">Begin Stage One</button>
+  <p class="splash-small">Your responses save privately to this device &nbsp;·&nbsp; Nothing is shared or stored elsewhere</p>
+</div>
+
+
+<!-- ══════════════════ APP ══════════════════ -->
+<div id="app">
+
+  <!-- Top bar -->
+  <div class="top-bar">
+    <div class="top-logo">Quietly <em>Tough</em></div>
+    <span class="starter-badge">Stage One Taster</span>
+    <span class="save-status" id="saveStatus">Saved ✓</span>
+  </div>
+
+  <!-- Nav -->
+  <div class="nav-bar">
+    <button class="nav-btn active" id="btn-guide" onclick="showSection('guide')">Guide</button>
+    <button class="nav-btn" id="btn-trythis" onclick="showSection('trythis')">Try This</button>
+    <button class="nav-btn" id="btn-reflections" onclick="showSection('reflections')">Reflections</button>
+  </div>
+
+  <!-- Progress -->
+  <div class="progress-wrap">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <span class="progress-label" id="progressLabel">Stage One — Fog</span>
+  </div>
+
+
+  <!-- ══ GUIDE TAB ══ -->
+  <div id="section-guide">
+    <div class="content-area">
+
+      <!-- Stage 1 Header -->
+      <div class="stage-header">
+        <div class="stage-number">01</div>
+        <div class="stage-tag">Stage One</div>
+        <h1 class="stage-title">FOG</h1>
+        <p class="stage-subtitle">Recognising the Drift</p>
+      </div>
+
+      <div class="prose">
+        <p>There's a moment — sometimes small, sometimes unmistakable — when something no longer feels aligned.</p>
+        <p>Nothing dramatic has happened. Your life still works. You're still capable, still dependable, still doing what needs to be done.</p>
+        <p>And yet, something feels muted.</p>
+        <p>This stage is about noticing that feeling without trying to explain it away or fix it. Fog doesn't mean you've failed. It doesn't mean you're lost. It means you've been moving on autopilot for long enough that your inner signal has softened.</p>
+        <p><span class="line-break">That's not a flaw.</span>It's information.</p>
+        <p>Fog tends to form quietly. Through routines that once made sense. Through roles you stepped into willingly — and then never revisited. Through strength that became expected rather than chosen.</p>
+        <p><span class="line-break">This stage asks very little of you.</span><span class="line-break">You are not here to make decisions.</span><span class="line-break">You are not here to take action.</span>You are not here to improve anything.</p>
+        <p>You're here to notice.</p>
+        <p>As you move through these pages, let yourself slow just enough to register what's been happening — without judgement, without urgency, without pressure to respond.</p>
+        <p>Clarity begins with noticing. Nothing more is required yet.</p>
+      </div>
+
+      <div class="reflection-block">
+        <div class="reflection-title">Before You Begin — Stage One</div>
+        <div class="reflection-intro">Take a breath. Let your shoulders drop. You don't need to hold anything together here.</div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 01</div>
+          <div class="prompt-question">Where does something in your life feel slightly off — even if you can't explain why yet?</div>
+          <textarea class="response-area" data-key="s1_r1" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 02</div>
+          <div class="prompt-question">Where are you continuing out of habit rather than desire?</div>
+          <textarea class="response-area" data-key="s1_r2" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 03</div>
+          <div class="prompt-question">Where does "fine" feel thinner than it used to?</div>
+          <textarea class="response-area" data-key="s1_r3" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 04</div>
+          <div class="prompt-question">What part of you has been asking for your attention — quietly, and repeatedly?</div>
+          <textarea class="response-area" data-key="s1_r4" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 05</div>
+          <div class="prompt-question">What have you been avoiding naming?</div>
+          <textarea class="response-area" data-key="s1_r5" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+      </div>
+
+      <!-- Chapter 1 -->
+      <div class="chapter-divider">
+        <div class="chapter-line"></div>
+        <div class="chapter-label">Chapter One</div>
+        <div class="chapter-line"></div>
+      </div>
+      <h2 class="chapter-title">The Myth of Midlife Decline</h2>
+      <p class="chapter-subtitle">Reclaiming the Middle as a Place of Power</p>
+      <div class="prose">
+        <p>There's a point in many women's lives where the story they've been living no longer fits — not because it was wrong, but because it's outdated.</p>
+        <p>Midlife is often framed as a narrowing: fewer options, reduced relevance, quieter ambitions. That narrative is absorbed slowly, through culture, language, and expectation — until it starts shaping how you interpret your own restlessness.</p>
+        <p><span class="line-break">But fog doesn't appear because something is ending.</span>It appears when something is shifting.</p>
+        <p>This chapter isn't about proving anything or reframing your entire life story. It's about noticing which ideas about this stage of life you've been carrying — and whether they still deserve your belief.</p>
+        <p>You don't need the book beside you to do this work. You already know what no longer rings true.</p>
+      </div>
+      <div class="try-this-block">
+        <span class="try-this-tag">Try This</span>
+        <div class="try-this-title">Rewrite the Inherited Story</div>
+        <p class="try-this-intro">This exercise invites you to pause and register how things feel, without trying to clarify or resolve them. You're simply allowing yourself to notice what's present.</p>
+        <div class="step-block">
+          <div class="step-label">Version A — The Inherited Script</div>
+          <div class="step-desc">Write the messages you absorbed about midlife — directly or indirectly. Phrases. Assumptions. Expectations. Don't edit.</div>
+          <textarea class="response-area-dark" data-key="c1_try_a" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="step-block">
+          <div class="step-label">Version B — Your Lived Truth</div>
+          <div class="step-desc">Now write what this stage actually feels like from the inside. What's changed? What's surfaced? What feels unfinished or newly possible?</div>
+          <textarea class="response-area-dark" data-key="c1_try_b" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+      </div>
+      <div class="reflection-block">
+        <div class="reflection-title">Reflection Prompts — Chapter One</div>
+        <div class="reflection-intro">These prompts help you recognise what you've just noticed, without needing to interpret or resolve it. Answer only what feels accessible.</div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 01</div>
+          <div class="prompt-question">What beliefs about this stage of life feel heavy or limiting?</div>
+          <textarea class="response-area" data-key="c1_r1" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 02</div>
+          <div class="prompt-question">What possibility feels quietly interesting — even if you'd normally dismiss it?</div>
+          <textarea class="response-area" data-key="c1_r2" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 03</div>
+          <div class="prompt-question">What changes when you stop treating this "middle" as an ending?</div>
+          <textarea class="response-area" data-key="c1_r3" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+      </div>
+      <div class="closing-nudge">
+        <div class="closing-nudge-label">Closing Nudge</div>
+        <p>You're not diminishing.<br>You're differentiating.<br><br>Let that land.</p>
+      </div>
+
+      <!-- Chapter 2 -->
+      <div class="chapter-divider">
+        <div class="chapter-line"></div>
+        <div class="chapter-label">Chapter Two</div>
+        <div class="chapter-line"></div>
+      </div>
+      <h2 class="chapter-title">The Comfort Zone Trap</h2>
+      <p class="chapter-subtitle">When Competence Becomes a Cage</p>
+      <div class="prose">
+        <p>Competence is a strength. It's also subtle.</p>
+        <p>When you're highly capable, you become trusted. Relied upon. Needed. And without noticing, your life can begin to organise itself around maintaining what works rather than exploring what still fits.</p>
+        <p><span class="line-break">This isn't burnout.</span><span class="line-break">It isn't dissatisfaction.</span>It's misalignment.</p>
+        <p>Fog often appears when your life is stable — but internally static.</p>
+        <p>This chapter isn't asking you to disrupt anything. It's inviting you to notice where routine has replaced choice, and where comfort has quietly become confinement.</p>
+      </div>
+      <div class="try-this-block">
+        <span class="try-this-tag">Try This</span>
+        <div class="try-this-title">Micro-Stretch Mapping</div>
+        <p class="try-this-intro">Notice how your days currently arrange themselves — what gets maintained, repeated, or protected without questioning why. Then find one 5% shift.</p>
+        <div class="table-exercise">
+          <table class="exercise-table">
+            <thead><tr><th>Autopilot Routine</th><th>What Keeps It in Place</th><th>A 5% Shift</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><textarea class="table-cell-input" data-key="c2_t1a" placeholder="e.g. checking email first thing" oninput="saveResponse(this)"></textarea></td>
+                <td><textarea class="table-cell-input" data-key="c2_t1b" placeholder="e.g. avoidance, habit" oninput="saveResponse(this)"></textarea></td>
+                <td><textarea class="table-cell-input" data-key="c2_t1c" placeholder="e.g. wait 30 mins" oninput="saveResponse(this)"></textarea></td>
+              </tr>
+              <tr>
+                <td><textarea class="table-cell-input" data-key="c2_t2a" oninput="saveResponse(this)"></textarea></td>
+                <td><textarea class="table-cell-input" data-key="c2_t2b" oninput="saveResponse(this)"></textarea></td>
+                <td><textarea class="table-cell-input" data-key="c2_t2c" oninput="saveResponse(this)"></textarea></td>
+              </tr>
+              <tr>
+                <td><textarea class="table-cell-input" data-key="c2_t3a" oninput="saveResponse(this)"></textarea></td>
+                <td><textarea class="table-cell-input" data-key="c2_t3b" oninput="saveResponse(this)"></textarea></td>
+                <td><textarea class="table-cell-input" data-key="c2_t3c" oninput="saveResponse(this)"></textarea></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="reflection-block">
+        <div class="reflection-title">Reflection Prompts — Chapter Two</div>
+        <div class="reflection-intro">These prompts help you recognise patterns that keep things running smoothly. Stay with what you observed, rather than what you think about it.</div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 01</div>
+          <div class="prompt-question">Where does repetition feel dull rather than grounding?</div>
+          <textarea class="response-area" data-key="c2_r1" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 02</div>
+          <div class="prompt-question">What responsibility are you carrying simply because you always have?</div>
+          <textarea class="response-area" data-key="c2_r2" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 03</div>
+          <div class="prompt-question">What small risk feels quietly relieving to imagine?</div>
+          <textarea class="response-area" data-key="c2_r3" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+      </div>
+      <div class="closing-nudge">
+        <div class="closing-nudge-label">Closing Nudge</div>
+        <p>Change rarely starts with a leap.<br>It starts with noticing where you're standing.</p>
+      </div>
+
+      <!-- Chapter 3 -->
+      <div class="chapter-divider">
+        <div class="chapter-line"></div>
+        <div class="chapter-label">Chapter Three</div>
+        <div class="chapter-line"></div>
+      </div>
+      <h2 class="chapter-title">Meeting Your Inner Voice</h2>
+      <p class="chapter-subtitle">Understanding the Narrator You've Been Living With</p>
+      <div class="prose">
+        <p>There's a voice inside you that comments, cautions, and narrates — often without your consent.</p>
+        <p><span class="line-break">It appears when you hesitate.</span><span class="line-break">When you consider change.</span>When you're tired.</p>
+        <p>This voice isn't the enemy. It developed to protect you — using rules that once made sense. But those rules may no longer match the life you're living now.</p>
+        <p>This chapter isn't about silencing that voice. It's about meeting it — and noticing what it's been trying to manage on your behalf.</p>
+      </div>
+      <div class="try-this-block">
+        <span class="try-this-tag">Try This</span>
+        <div class="try-this-title">A Simple Dialogue</div>
+        <p class="try-this-intro">This exercise invites you to notice the inner voice and let it speak — without editing, without correcting, without asking it to be reasonable.</p>
+        <div class="step-block">
+          <div class="step-label">"What are you trying to protect me from?"</div>
+          <div class="step-desc">Let the response come without editing.</div>
+          <textarea class="response-area-dark" data-key="c3_try_a" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="step-block">
+          <div class="step-label">What does this voice need to hear from you now?</div>
+          <textarea class="response-area-dark" data-key="c3_try_b" placeholder="Write back — briefly." oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="step-block">
+          <div class="step-label">Pause when you're done. What do you notice has shifted?</div>
+          <textarea class="response-area-dark" data-key="c3_try_c" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+      </div>
+      <div class="reflection-block">
+        <div class="reflection-title">Reflection Prompts — Chapter Three</div>
+        <div class="reflection-intro">These questions support gentle recognition of what surfaced. There's no need to make meaning yet.</div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 01</div>
+          <div class="prompt-question">When does your inner voice speak the loudest?</div>
+          <textarea class="response-area" data-key="c3_r1" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 02</div>
+          <div class="prompt-question">What tone does it usually use?</div>
+          <textarea class="response-area" data-key="c3_r2" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 03</div>
+          <div class="prompt-question">What does it seem most concerned about losing?</div>
+          <textarea class="response-area" data-key="c3_r3" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+      </div>
+      <div class="closing-nudge">
+        <div class="closing-nudge-label">Closing Nudge</div>
+        <p>Your inner voice isn't evidence of weakness.<br>It's evidence of care.<br><br>You don't need to resolve anything yet.</p>
+      </div>
+
+      <!-- Stage 1 Close -->
+      <div class="stage-close">
+        <div class="stage-close-label">Stage One — Complete</div>
+        <h2>FOG — Integration</h2>
+        <div class="stage-close-prose">
+          <p>You've noticed what no longer fits.</p>
+          <p>You've seen where habit replaced choice, where strength became expectation, and where "fine" stopped being enough.</p>
+          <p>Most importantly, you didn't rush to fix any of it.</p>
+          <p>That matters.</p>
+          <p><span class="highlight">Fog is not the problem. It's the signal.</span></p>
+          <p>You don't need to clear it yet. You just need to know it's there.</p>
+        </div>
+      </div>
+
+      <!-- What's next -->
+      <div style="text-align:center;padding:56px 0 0;">
+        <button class="begin-btn" onclick="showSection('complete')" style="font-size:13px;padding:18px 48px;">
+          See what comes next &nbsp;→
+        </button>
+      </div>
+
+    </div><!-- /content-area -->
+  </div><!-- /section-guide -->
+
+
+  <!-- ══ TRY THIS TAB ══ -->
+  <div id="section-trythis" style="display:none;">
+    <div class="journal-view">
+      <div class="journal-header">
+        <h2>Try This</h2>
+        <p>All three Stage One exercises in one place — each with a brief note on what it's for. Your responses here are the same as those in the Guide.</p>
+      </div>
+      <div class="tab-stage-label">Stage 1 — Fog</div>
+
+      <div class="tab-exercise-card">
+        <div class="tab-exercise-meta">Chapter 1 · Rewrite the Inherited Story</div>
+        <div class="tab-exercise-context">Notice which beliefs about this stage of life you've been carrying — and whether they still deserve your belief.</div>
+        <div class="tab-exercise-step">Version A — The Inherited Script</div>
+        <div class="step-desc" style="font-size:14px;color:#3a3a50;margin-bottom:8px;">Write the messages you absorbed about midlife. Phrases. Assumptions. Expectations. Don't edit.</div>
+        <textarea class="response-area" data-key="c1_try_a" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        <div class="tab-exercise-step" style="margin-top:16px;">Version B — Your Lived Truth</div>
+        <div class="step-desc" style="font-size:14px;color:#3a3a50;margin-bottom:8px;">What does this stage actually feel like from the inside?</div>
+        <textarea class="response-area" data-key="c1_try_b" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+      </div>
+
+      <div class="tab-exercise-card">
+        <div class="tab-exercise-meta">Chapter 2 · Micro-Stretch Mapping</div>
+        <div class="tab-exercise-context">Notice where routine has replaced choice — then find one tiny variation.</div>
+        <div class="table-exercise">
+          <table class="exercise-table">
+            <thead><tr><th>Autopilot Routine</th><th>What Keeps It in Place</th><th>A 5% Shift</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><textarea class="table-cell-input" data-key="c2_t1a" oninput="saveResponse(this)"></textarea></td>
+                <td><textarea class="table-cell-input" data-key="c2_t1b" oninput="saveResponse(this)"></textarea></td>
+                <td><textarea class="table-cell-input" data-key="c2_t1c" oninput="saveResponse(this)"></textarea></td>
+              </tr>
+              <tr>
+                <td><textarea class="table-cell-input" data-key="c2_t2a" oninput="saveResponse(this)"></textarea></td>
+                <td><textarea class="table-cell-input" data-key="c2_t2b" oninput="saveResponse(this)"></textarea></td>
+                <td><textarea class="table-cell-input" data-key="c2_t2c" oninput="saveResponse(this)"></textarea></td>
+              </tr>
+              <tr>
+                <td><textarea class="table-cell-input" data-key="c2_t3a" oninput="saveResponse(this)"></textarea></td>
+                <td><textarea class="table-cell-input" data-key="c2_t3b" oninput="saveResponse(this)"></textarea></td>
+                <td><textarea class="table-cell-input" data-key="c2_t3c" oninput="saveResponse(this)"></textarea></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="tab-exercise-card">
+        <div class="tab-exercise-meta">Chapter 3 · A Simple Dialogue</div>
+        <div class="tab-exercise-context">Meet your inner voice — notice what it's been trying to manage on your behalf.</div>
+        <div class="tab-exercise-step">"What are you trying to protect me from?"</div>
+        <textarea class="response-area" data-key="c3_try_a" placeholder="Let the response come without editing…" oninput="saveResponse(this)"></textarea>
+        <div class="tab-exercise-step" style="margin-top:16px;">What does this voice need to hear from you now?</div>
+        <textarea class="response-area" data-key="c3_try_b" placeholder="Write back — briefly." oninput="saveResponse(this)"></textarea>
+        <div class="tab-exercise-step" style="margin-top:16px;">What do you notice has shifted?</div>
+        <textarea class="response-area" data-key="c3_try_c" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+      </div>
+
+      <div style="border-top:1px solid var(--stone);margin-top:48px;padding-top:32px;text-align:center;">
+        <button class="export-btn" onclick="exportAll()">Export My Responses</button>
+        <p style="margin-top:16px;font-size:13px;color:var(--mid-purple);">Ready for the full journey?</p>
+        <div style="margin-top:12px;">
+          <a href="https://www.quietlytough.com/art-of-calm-strength-complete" style="display:inline-block;background:var(--accent);color:#fff;font-family:'Lato',sans-serif;font-size:14px;font-weight:700;letter-spacing:0.04em;padding:14px 32px;text-decoration:none;">Get the Complete Bundle — £22.98</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══ REFLECTIONS TAB ══ -->
+  <div id="section-reflections" style="display:none;">
+    <div class="journal-view">
+      <div class="journal-header">
+        <h2>Reflections</h2>
+        <p>All Stage One reflection prompts in one place — for quieter moments when a question is enough. Your responses here are the same as those in the Guide.</p>
+      </div>
+      <div class="tab-stage-label">Stage 1 — Fog · Before You Begin</div>
+      <div class="tab-exercise-card">
+        <div class="tab-exercise-context">Before Stage One — notice what's already present, without needing to change it.</div>
+        <div class="prompt-item"><div class="prompt-number">01</div><div class="prompt-question">Where does something in your life feel slightly off?</div><textarea class="response-area" data-key="s1_r1" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+        <div class="prompt-item"><div class="prompt-number">02</div><div class="prompt-question">Where are you continuing out of habit rather than desire?</div><textarea class="response-area" data-key="s1_r2" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+        <div class="prompt-item"><div class="prompt-number">03</div><div class="prompt-question">Where does "fine" feel thinner than it used to?</div><textarea class="response-area" data-key="s1_r3" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+        <div class="prompt-item"><div class="prompt-number">04</div><div class="prompt-question">What part of you has been asking for your attention — quietly, and repeatedly?</div><textarea class="response-area" data-key="s1_r4" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+        <div class="prompt-item"><div class="prompt-number">05</div><div class="prompt-question">What have you been avoiding naming?</div><textarea class="response-area" data-key="s1_r5" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+      </div>
+
+      <div class="tab-exercise-card">
+        <div class="tab-exercise-meta">Chapter 1 · The Myth of Midlife Decline</div>
+        <div class="tab-exercise-context">Which ideas about this stage of life have you been carrying — and do they still deserve your belief?</div>
+        <div class="prompt-item"><div class="prompt-number">01</div><div class="prompt-question">What beliefs about this stage of life feel heavy or limiting?</div><textarea class="response-area" data-key="c1_r1" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+        <div class="prompt-item"><div class="prompt-number">02</div><div class="prompt-question">What possibility feels quietly interesting — even if you'd normally dismiss it?</div><textarea class="response-area" data-key="c1_r2" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+        <div class="prompt-item"><div class="prompt-number">03</div><div class="prompt-question">What changes when you stop treating this "middle" as an ending?</div><textarea class="response-area" data-key="c1_r3" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+      </div>
+
+      <div class="tab-exercise-card">
+        <div class="tab-exercise-meta">Chapter 2 · The Comfort Zone Trap</div>
+        <div class="tab-exercise-context">Noticing patterns that keep things running smoothly — staying with what you observed.</div>
+        <div class="prompt-item"><div class="prompt-number">01</div><div class="prompt-question">Where does repetition feel dull rather than grounding?</div><textarea class="response-area" data-key="c2_r1" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+        <div class="prompt-item"><div class="prompt-number">02</div><div class="prompt-question">What responsibility are you carrying simply because you always have?</div><textarea class="response-area" data-key="c2_r2" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+        <div class="prompt-item"><div class="prompt-number">03</div><div class="prompt-question">What small risk feels quietly relieving to imagine?</div><textarea class="response-area" data-key="c2_r3" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+      </div>
+
+      <div class="tab-exercise-card">
+        <div class="tab-exercise-meta">Chapter 3 · Meeting Your Inner Voice</div>
+        <div class="tab-exercise-context">Gentle recognition of what surfaced — no need to make meaning yet.</div>
+        <div class="prompt-item"><div class="prompt-number">01</div><div class="prompt-question">When does your inner voice speak the loudest?</div><textarea class="response-area" data-key="c3_r1" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+        <div class="prompt-item"><div class="prompt-number">02</div><div class="prompt-question">What tone does it usually use?</div><textarea class="response-area" data-key="c3_r2" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+        <div class="prompt-item"><div class="prompt-number">03</div><div class="prompt-question">What does it seem most concerned about losing?</div><textarea class="response-area" data-key="c3_r3" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+      </div>
+
+      <div style="border-top:1px solid var(--stone);margin-top:48px;padding-top:32px;text-align:center;">
+        <button class="export-btn" onclick="exportAll()">Export My Responses</button>
+        <p style="margin-top:16px;font-size:13px;color:var(--mid-purple);">Ready for the full journey?</p>
+        <div style="margin-top:12px;">
+          <a href="https://www.quietlytough.com/art-of-calm-strength-complete" style="display:inline-block;background:var(--accent);color:#fff;font-family:'Lato',sans-serif;font-size:14px;font-weight:700;letter-spacing:0.04em;padding:14px 32px;text-decoration:none;">Get the Complete Bundle — £22.98</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══ COMPLETE SCREEN ══ -->
+  <div id="section-complete" style="display:none;">
+    <div class="complete-screen">
+      <p class="complete-eyebrow">Stage One — Complete</p>
+      <h2 class="complete-title">You've done something most people skip.</h2>
+      <div class="complete-divider"></div>
+
+      <div class="complete-prose">
+        <p>You slowed down enough to notice.</p>
+        <p>You didn't rush to fix anything, explain anything away, or perform clarity you don't yet have. You stayed with what's actually there — and that's where everything starts.</p>
+        <p>Stage One isn't a warm-up. For many women, it's the most important stage in the whole guide — because it's the one that's hardest to do honestly.</p>
+        <p>You've done it.</p>
+      </div>
+
+      <div class="complete-quote">
+        <p>"Fog is not the problem. It's the signal. You don't need to clear it yet. You just need to know it's there."</p>
+        <cite>— Audrey Finch, The Art of Calm Strength</cite>
+      </div>
+
+      <div class="what-next">
+        <div class="what-next-label">What comes next — in the full guide</div>
+        <div class="what-next-grid">
+          <div class="what-next-item"><span>·</span><p><strong>Stage 2 — Filter.</strong> Quiet the noise. Reclaim your attention. Learn the quiet no.</p></div>
+          <div class="what-next-item"><span>·</span><p><strong>Stage 3 — Focus.</strong> Reconnect with what matters. Core values. Intentional direction.</p></div>
+          <div class="what-next-item"><span>·</span><p><strong>Stage 4 — Flow.</strong> Rebuild your rhythm. Energy. Rest as strategy. Momentum without force.</p></div>
+          <div class="what-next-item"><span>·</span><p><strong>Stage 5 — Rise.</strong> Lead yourself with calm authority. Boundaries. Presence. Emotional agility.</p></div>
+          <div class="what-next-item"><span>·</span><p><strong>Stage 6 — Rhythm.</strong> Live from calm continuity. Rituals of return. Rest as ordinary.</p></div>
+          <div class="what-next-item"><span>·</span><p><strong>Final Chapter — Quiet Authority.</strong> The arrival. Steady, clear, and entirely yourself.</p></div>
+        </div>
+        <p style="font-size:14px;line-height:1.7;color:#3a3a50;">Plus 15 more chapters, 119 additional prompts and exercises, three views to work the way that suits you, and a complete exportable record of everything you write.</p>
+      </div>
+
+      <div class="bundle-card">
+        <div class="bundle-badge">The Complete Experience</div>
+        <div class="bundle-title">The Art of Calm Strength<br>Book + Interactive Practice Guide</div>
+        <div class="bundle-desc">The book gives you the thinking. The Practice Guide gives you somewhere to do the work. Together, they're the complete Quietly Tough experience — the framework and the practice, as they were meant to be used. Buying them together saves you £7.</div>
+        <div class="bundle-price">£22.98</div>
+        <div class="bundle-price-note">Book £12.99 + Practice Guide £16.99 — save £7 when you buy together</div>
+        <div class="bundle-includes">
+          ✓ &nbsp;The Art of Calm Strength — the full book (PDF/ebook)<br>
+          ✓ &nbsp;The complete Interactive Practice Guide — all 6 stages<br>
+          ✓ &nbsp;148 guided prompts and exercises<br>
+          ✓ &nbsp;Guide, Try This and Reflections views<br>
+          ✓ &nbsp;Autosaves privately to your device<br>
+          ✓ &nbsp;Export your full record at any time<br>
+          ✓ &nbsp;14-day satisfaction guarantee
+        </div>
+        <a href="https://www.quietlytough.com/art-of-calm-strength-complete" class="bundle-btn">Get the Complete Bundle — £22.98</a>
+
+      </div>
+
+      <div style="text-align:center;margin-top:32px;">
+        <button class="export-btn" onclick="exportAll()">Export My Stage One Responses</button>
+        <p style="margin-top:12px;font-size:12px;color:var(--stone);">Your responses are saved on this device. Export them any time as a text file.</p>
+      </div>
+
+      <div style="margin-top:48px;text-align:center;padding-top:32px;border-top:1px solid var(--stone);">
+        <p style="font-family:'Libre Baskerville',serif;font-style:italic;font-size:16px;color:var(--mid-purple);line-height:1.7;">Strong. Still. Quietly Tough.</p>
+        <p style="font-size:12px;color:var(--stone);margin-top:8px;letter-spacing:0.1em;">quietlytough.com</p>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /app -->
+
+
+<script>
+  const STORAGE_KEY = "qt_starter_pack";
+  const questions = {
+    s1_r1: { stage: "Stage 1 — Fog", q: "Where does something feel slightly off?" },
+    s1_r2: { stage: "Stage 1 — Fog", q: "Where are you continuing out of habit?" },
+    s1_r3: { stage: "Stage 1 — Fog", q: "Where does fine feel thinner than it used to?" },
+    s1_r4: { stage: "Stage 1 — Fog", q: "What part of you has been asking for attention?" },
+    s1_r5: { stage: "Stage 1 — Fog", q: "What have you been avoiding naming?" },
+    c1_try_a: { stage: "Ch.1 — Myth of Midlife Decline", q: "Version A: The Inherited Script" },
+    c1_try_b: { stage: "Ch.1 — Myth of Midlife Decline", q: "Version B: Your Lived Truth" },
+    c1_r1: { stage: "Ch.1 — Myth of Midlife Decline", q: "What beliefs feel heavy or limiting?" },
+    c1_r2: { stage: "Ch.1 — Myth of Midlife Decline", q: "What possibility feels quietly interesting?" },
+    c1_r3: { stage: "Ch.1 — Myth of Midlife Decline", q: "What changes when you stop treating this as an ending?" },
+    c2_t1a: { stage: "Ch.2 — Comfort Zone Trap", q: "Autopilot Routine 1" },
+    c2_t1b: { stage: "Ch.2 — Comfort Zone Trap", q: "What keeps it in place 1" },
+    c2_t1c: { stage: "Ch.2 — Comfort Zone Trap", q: "A 5% shift 1" },
+    c2_t2a: { stage: "Ch.2 — Comfort Zone Trap", q: "Autopilot Routine 2" },
+    c2_t2b: { stage: "Ch.2 — Comfort Zone Trap", q: "What keeps it in place 2" },
+    c2_t2c: { stage: "Ch.2 — Comfort Zone Trap", q: "A 5% shift 2" },
+    c2_t3a: { stage: "Ch.2 — Comfort Zone Trap", q: "Autopilot Routine 3" },
+    c2_t3b: { stage: "Ch.2 — Comfort Zone Trap", q: "What keeps it in place 3" },
+    c2_t3c: { stage: "Ch.2 — Comfort Zone Trap", q: "A 5% shift 3" },
+    c2_r1: { stage: "Ch.2 — Comfort Zone Trap", q: "Where does repetition feel dull?" },
+    c2_r2: { stage: "Ch.2 — Comfort Zone Trap", q: "What are you carrying because you always have?" },
+    c2_r3: { stage: "Ch.2 — Comfort Zone Trap", q: "What small risk feels quietly relieving?" },
+    c3_try_a: { stage: "Ch.3 — Meeting Your Inner Voice", q: "What are you trying to protect me from?" },
+    c3_try_b: { stage: "Ch.3 — Meeting Your Inner Voice", q: "What does this voice need to hear?" },
+    c3_try_c: { stage: "Ch.3 — Meeting Your Inner Voice", q: "What has shifted?" },
+    c3_r1: { stage: "Ch.3 — Meeting Your Inner Voice", q: "When does your inner voice speak loudest?" },
+    c3_r2: { stage: "Ch.3 — Meeting Your Inner Voice", q: "What tone does it usually use?" },
+    c3_r3: { stage: "Ch.3 — Meeting Your Inner Voice", q: "What does it seem most concerned about losing?" }
+  };
+
+  function getData() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}"); }
+    catch(e) { return {}; }
+  }
+
+  function saveResponse(el) {
+    const data = getData();
+    data[el.dataset.key] = el.value;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    updateProgress();
+    flashSaved();
+  }
+
+  function loadResponses() {
+    const data = getData();
+    document.querySelectorAll("[data-key]").forEach(el => {
+      if (data[el.dataset.key]) el.value = data[el.dataset.key];
+    });
+    updateProgress();
+  }
+
+  let saveTimer;
+  function flashSaved() {
+    clearTimeout(saveTimer);
+    const s = document.getElementById("saveStatus");
+    s.classList.add("show");
+    saveTimer = setTimeout(() => s.classList.remove("show"), 2000);
+  }
+
+  function updateProgress() {
+    const data = getData();
+    const filled = Object.keys(questions).filter(k => data[k] && data[k].trim().length > 0).length;
+    const total = Object.keys(questions).length;
+    const pct = Math.round((filled / total) * 100);
+    document.getElementById("progressFill").style.width = pct + "%";
+    document.getElementById("progressLabel").textContent = filled + " of " + total + " responses · Stage One";
+  }
+
+  function startApp() {
+    document.getElementById("splash").style.display = "none";
+    document.getElementById("app").style.display = "block";
+    loadResponses();
+  }
+
+  function showSection(name) {
+    ["guide","trythis","reflections","complete"].forEach(s => {
+      const el = document.getElementById("section-" + s);
+      if (el) el.style.display = name === s ? "block" : "none";
+      const btn = document.getElementById("btn-" + s);
+      if (btn) btn.classList.toggle("active", name === s);
+    });
+    if (name !== "guide") loadResponses();
+  }
+
+  function exportAll() {
+    const data = getData();
+    let text = "QUIETLY TOUGH — THE ART OF CALM STRENGTH\n";
+    text += "Practice Guide — Stage One Responses\n";
+    text += "=====================================\n\n";
+    let lastStage = "";
+    Object.keys(questions).forEach(key => {
+      const meta = questions[key];
+      const val = data[key] || "";
+      if (!val.trim()) return;
+      if (meta.stage !== lastStage) {
+        text += "\n── " + meta.stage.toUpperCase() + " ──\n\n";
+        lastStage = meta.stage;
+      }
+      text += meta.q + "\n" + val + "\n\n";
+    });
+    text += "\n— quietlytough.com —";
+    const blob = new Blob([text], { type: "text/plain" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "quietly-tough-stage-one.txt";
+    a.click();
+  }
+</script>
+</body>
+</html>
