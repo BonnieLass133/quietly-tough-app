@@ -1,0 +1,3329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Quietly Tough">
+<title>Quietly Tough — Practice Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --warm-white: #FDFCFF;
+    --pale-grey: #F0EEF5;
+    --soft-lavender: #EDE8FB;
+    --body-text: #1C1A2E;
+    --deep-purple: #3D0F99;
+    --accent: #5E17EB;
+    --pink: #E91E8C;
+    --stone: #CBD4E6;
+    --mid-purple: #6B3FA0;
+    /* legacy aliases kept so existing class refs still work */
+    --cream: #F0EEF5;
+    --taupe: #6B3FA0;
+    --charcoal: #1C1A2E;
+    --deep: #3D0F99;
+    --sage: #5E17EB;
+    --mist: #EDE8FB;
+    --accent-light: #9B6FE8;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--warm-white);
+    color: var(--body-text);
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── SPLASH / HOME ── */
+  #splash {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 24px;
+    text-align: center;
+    background: var(--warm-white);
+    border-bottom: 1px solid var(--stone);
+    position: relative;
+    overflow: hidden;
+  }
+
+
+
+
+
+  .splash-eyebrow {
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--accent-light);
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+
+  .splash-title {
+    font-family: 'Libre Baskerville', serif;
+    font-weight: 400;
+    font-size: clamp(42px, 8vw, 72px);
+    color: var(--deep-purple);
+    line-height: 1.05;
+    letter-spacing: 0.02em;
+    margin-bottom: 16px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.4s forwards;
+  }
+
+  .splash-title em {
+    font-style: italic;
+    color: var(--pink);
+  }
+
+  .splash-subtitle {
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--mid-purple);
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.6s forwards;
+  }
+
+  .splash-author {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mid-purple);
+    margin-bottom: 64px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.7s forwards;
+  }
+
+  .splash-divider {
+    width: 40px;
+    height: 1px;
+    background: var(--accent);
+    margin: 0 auto 48px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.8s forwards;
+  }
+
+  .begin-btn {
+    display: inline-block;
+    padding: 16px 48px;
+    border: 1px solid var(--deep-purple);
+    color: var(--deep-purple);
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    cursor: pointer;
+    background: transparent;
+    transition: all 0.3s ease;
+    opacity: 0;
+    animation: fadeUp 0.8s 1s forwards;
+  }
+
+  .begin-btn:hover {
+    background: var(--deep-purple);
+    color: var(--warm-white);
+  }
+
+  .saved-indicator {
+    margin-top: 24px;
+    font-size: 11px;
+    color: var(--mid-purple);
+    opacity: 0;
+    animation: fadeUp 0.8s 1.1s forwards;
+  }
+
+  /* ── NAVIGATION ── */
+  #app { display: none; min-height: 100vh; }
+
+  .top-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--warm-white);
+    border-bottom: 1px solid var(--stone);
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+
+  .top-logo {
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--deep-purple);
+    cursor: pointer;
+  }
+
+  .top-nav {
+    display: flex;
+    gap: 8px;
+  }
+
+  .nav-btn {
+    padding: 6px 14px;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--taupe);
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Lato', sans-serif;
+  }
+
+  .nav-btn:hover, .nav-btn.active {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--soft-lavender);
+  }
+
+  .save-status {
+    font-size: 10px;
+    color: var(--sage);
+    letter-spacing: 0.1em;
+    opacity: 0;
+    transition: opacity 0.5s;
+  }
+
+  .save-status.show { opacity: 1; }
+
+  /* ── MAIN CONTENT ── */
+  .main {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 48px 24px 120px;
+  }
+
+  /* ── STAGE HEADER ── */
+  .stage-header {
+    text-align: center;
+    padding: 64px 0 48px;
+    position: relative;
+  }
+
+  .stage-tag {
+    display: inline-block;
+    font-size: 9px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--soft-lavender);
+    padding: 6px 16px;
+    margin-bottom: 24px;
+  }
+
+  .stage-number {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 120px;
+    font-weight: 300;
+    color: var(--mist);
+    line-height: 1;
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 0;
+    letter-spacing: -0.05em;
+    pointer-events: none;
+  }
+
+  .stage-title {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(36px, 6vw, 52px);
+    font-weight: 700;
+    color: var(--deep-purple);
+    position: relative;
+    z-index: 1;
+    margin-bottom: 8px;
+  }
+
+  .stage-subtitle {
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--taupe);
+    margin-bottom: 40px;
+  }
+
+  /* ── PROSE ── */
+  .prose {
+    font-size: 16px;
+    line-height: 1.9;
+    color: var(--charcoal);
+    margin-bottom: 32px;
+  }
+
+  .prose p { margin-bottom: 16px; }
+
+  .prose .line-break {
+    display: block;
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--taupe);
+    line-height: 1.6;
+    margin: 4px 0;
+  }
+
+  /* ── REFLECTION BLOCK ── */
+  .reflection-block {
+    background: var(--soft-lavender);
+    border-left: 3px solid var(--pink);
+    padding: 32px 36px;
+    margin: 40px 0;
+    border-radius: 0 4px 4px 0;
+  }
+
+  .reflection-title {
+    font-size: 9px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .reflection-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--mist);
+  }
+
+  .reflection-intro {
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--taupe);
+    margin-bottom: 28px;
+    line-height: 1.7;
+  }
+
+  .prompt-item {
+    margin-bottom: 28px;
+  }
+
+  .prompt-number {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--accent-light);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+
+  .prompt-question {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 18px;
+    color: var(--deep);
+    margin-bottom: 12px;
+    line-height: 1.5;
+  }
+
+  .response-area {
+    width: 100%;
+    min-height: 100px;
+    border: none;
+    border-bottom: 1px solid var(--stone);
+    background: transparent;
+    font-family: 'Lato', sans-serif;
+    font-size: 15px;
+    color: var(--body-text);
+    resize: vertical;
+    padding: 12px 4px;
+    line-height: 1.8;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .response-area:focus {
+    border-bottom-color: var(--accent);
+  }
+
+  .response-area::placeholder {
+    color: var(--stone);
+    font-style: italic;
+  }
+
+  /* ── TRY THIS BLOCK ── */
+  .try-this-block {
+    background: var(--pale-grey);
+    color: var(--body-text);
+    padding: 36px 40px;
+    margin: 40px 0;
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .try-this-block::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--pink);
+  }
+
+  .try-this-tag {
+    font-size: 9px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .try-this-title {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--deep-purple);
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .try-this-intro {
+    font-size: 14px;
+    color: var(--mid-purple);
+    line-height: 1.8;
+    margin-bottom: 28px;
+  }
+
+  .step-block {
+    margin-bottom: 24px;
+  }
+
+  .step-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+
+  .step-desc {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 17px;
+    color: var(--body-text);
+    margin-bottom: 12px;
+    line-height: 1.6;
+  }
+
+  .response-area-dark {
+    width: 100%;
+    min-height: 90px;
+    border: none;
+    border-bottom: 1px solid var(--stone);
+    background: transparent;
+    font-family: 'Lato', sans-serif;
+    font-size: 15px;
+    color: var(--body-text);
+    resize: vertical;
+    padding: 10px 4px;
+    line-height: 1.8;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .response-area-dark:focus {
+    border-bottom-color: var(--pink);
+  }
+
+  .response-area-dark::placeholder {
+    color: var(--stone);
+    font-style: italic;
+  }
+
+  /* ── TABLE EXERCISE ── */
+  .table-exercise {
+    background: var(--pale-grey);
+    padding: 32px;
+    margin: 20px 0;
+    border-radius: 2px;
+  }
+
+  .exercise-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+  }
+
+  .exercise-table th {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--stone);
+    text-align: left;
+    font-weight: 400;
+  }
+
+  .exercise-table td {
+    padding: 4px;
+    border-bottom: 1px solid var(--stone);
+    vertical-align: top;
+  }
+
+  .table-cell-input {
+    width: 100%;
+    min-height: 60px;
+    border: none;
+    background: transparent;
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+    color: var(--body-text);
+    resize: none;
+    padding: 8px;
+    outline: none;
+    line-height: 1.7;
+  }
+
+  .table-cell-input::placeholder {
+    color: var(--stone);
+    font-style: italic;
+  }
+
+  /* ── CHAPTER HEADER ── */
+  .chapter-divider {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin: 56px 0 40px;
+  }
+
+  .chapter-line { flex: 1; height: 1px; background: var(--mist); }
+
+  .chapter-label {
+    font-size: 9px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--taupe);
+    white-space: nowrap;
+  }
+
+  .chapter-title {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(28px, 5vw, 40px);
+    font-weight: 700;
+    color: var(--deep-purple);
+    margin-bottom: 6px;
+    line-height: 1.2;
+  }
+
+  .chapter-subtitle {
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--taupe);
+    margin-bottom: 28px;
+  }
+
+  /* ── CLOSING NUDGE ── */
+  .closing-nudge {
+    text-align: center;
+    padding: 40px 32px;
+    margin: 48px 0;
+    border-top: 1px solid var(--stone);
+    border-bottom: 1px solid var(--stone);
+  }
+
+  .closing-nudge-label {
+    font-size: 9px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+  }
+
+  .closing-nudge p {
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--charcoal);
+    line-height: 1.6;
+  }
+
+  /* ── STAGE CLOSE ── */
+  .stage-close {
+    background: var(--soft-lavender);
+    color: var(--body-text);
+    border-left: 4px solid var(--pink);
+    padding: 56px 48px;
+    margin: 48px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+
+
+  .stage-close-label {
+    font-size: 9px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin-bottom: 24px;
+    position: relative;
+  }
+
+  .stage-close h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--deep-purple);
+    margin-bottom: 32px;
+    position: relative;
+  }
+
+  .stage-close-prose {
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--mid-purple);
+    line-height: 1.9;
+    max-width: 480px;
+    margin: 0 auto 32px;
+    position: relative;
+  }
+
+  .stage-close-prose .highlight {
+    color: var(--pink);
+    font-style: normal;
+  }
+
+  /* ── NEXT STAGE BUTTON ── */
+  .next-stage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin: 40px auto;
+    cursor: pointer;
+    padding: 20px 40px;
+    border: 1px solid var(--stone);
+    width: fit-content;
+    transition: all 0.3s;
+    color: var(--taupe);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-family: 'Lato', sans-serif;
+  }
+
+  .next-stage:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .next-stage span { font-size: 18px; }
+
+  /* ── COMING SOON ── */
+  .coming-soon {
+    text-align: center;
+    padding: 80px 32px;
+    color: var(--taupe);
+  }
+
+  .coming-soon h3 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 28px;
+    font-weight: 300;
+    margin-bottom: 16px;
+    color: var(--charcoal);
+  }
+
+  .coming-soon p {
+    font-size: 14px;
+    line-height: 1.8;
+    max-width: 360px;
+    margin: 0 auto;
+  }
+
+  /* ── JOURNAL VIEW ── */
+  .journal-view {
+    padding: 48px 0;
+  }
+
+  .journal-header {
+    margin-bottom: 40px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--stone);
+  }
+
+  .journal-header h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 32px;
+    font-weight: 300;
+    color: var(--deep);
+    margin-bottom: 8px;
+  }
+
+  .journal-header p {
+    font-size: 13px;
+    color: var(--taupe);
+    line-height: 1.7;
+  }
+
+  .journal-entry {
+    margin-bottom: 32px;
+    padding: 24px 28px;
+    background: var(--soft-lavender);
+    border-left: 2px solid var(--mist);
+  }
+
+  .journal-entry.has-content { border-left-color: var(--pink); }
+
+  .journal-entry-label {
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--taupe);
+    margin-bottom: 4px;
+  }
+
+  .journal-entry-question {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 17px;
+    color: var(--charcoal);
+    margin-bottom: 12px;
+    line-height: 1.5;
+  }
+
+  .journal-entry-response {
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--taupe);
+    line-height: 1.8;
+  }
+
+  .journal-empty {
+    font-size: 13px;
+    color: var(--stone);
+    font-style: italic;
+  }
+
+  .export-btn {
+    display: inline-block;
+    margin-top: 32px;
+    padding: 14px 36px;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    background: transparent;
+    transition: all 0.3s;
+    font-family: 'Lato', sans-serif;
+  }
+
+  .export-btn:hover { background: var(--accent); color: white; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── PROGRESS BAR ── */
+  .progress-bar {
+    height: 2px;
+    background: var(--pale-grey);
+    margin-bottom: 48px;
+    position: relative;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: var(--pink);
+    transition: width 0.5s ease;
+  }
+
+  .progress-label {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--taupe);
+    text-align: right;
+    margin-top: 6px;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .try-this-block { padding: 28px 24px; }
+    .reflection-block { padding: 24px 20px; }
+    .main { padding: 32px 16px 100px; }
+    .stage-close { padding: 40px 24px; }
+    .exercise-table th, .exercise-table td { padding: 4px 6px; }
+  }
+
+  /* ── QT BRAND REFINEMENTS ── */
+
+  /* Decorative wave mark on splash — echoes cover */
+  #splash::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--stone) 0%, var(--accent) 40%, var(--pink) 100%);
+  }
+
+  /* Top accent bar on nav */
+  .top-bar::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent) 0%, var(--pink) 100%);
+  }
+  .top-bar { position: sticky; }
+
+  /* Chapter title weight — Libre Baskerville looks better at normal weight */
+  .chapter-title { font-weight: 700; color: var(--deep-purple); }
+  .stage-title   { font-weight: 700; color: var(--deep-purple); }
+
+  /* Stage tag — more on-brand */
+  .stage-tag {
+    color: var(--accent);
+    border: 1px solid var(--stone);
+    background: var(--soft-lavender);
+  }
+
+  /* Stage number — use deep purple tint */
+  .stage-number { color: var(--soft-lavender); }
+
+  /* Reflection block refinement — pink left stripe */
+  .reflection-title { color: var(--pink); }
+
+  .try-this-tag { color: var(--pink); }
+
+  .try-this-title { color: var(--deep-purple); font-weight: 700; }
+
+  .step-label { color: var(--accent); font-weight: 700; }
+
+  /* Closing nudge borders — use lavender */
+  .closing-nudge {
+    border-top: 1px solid var(--stone);
+    border-bottom: 1px solid var(--stone);
+    background: var(--soft-lavender);
+    border-radius: 2px;
+  }
+
+  /* Closing nudge label */
+  .closing-nudge-label { color: var(--pink); }
+
+  .stage-close-label { color: var(--pink); }
+
+  .stage-close-prose .highlight { color: var(--pink); font-style: normal; }
+
+  /* Next stage button */
+  .next-stage {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .next-stage:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--warm-white);
+  }
+
+  /* Progress bar track */
+  .progress-bar { background: var(--soft-lavender); }
+
+  /* Save status */
+  .save-status { color: var(--accent); }
+
+  /* Export button */
+  .export-btn { border-color: var(--accent); color: var(--accent); }
+  .export-btn:hover { background: var(--accent); color: var(--warm-white); }
+
+  /* Begin button on splash */
+  .begin-btn {
+    border-color: var(--deep-purple);
+    color: var(--deep-purple);
+  }
+  .begin-btn:hover {
+    background: var(--deep-purple);
+    border-color: var(--deep-purple);
+    color: var(--warm-white);
+  }
+
+  .splash-title em { color: var(--pink); }
+
+  /* Splash eyebrow and author */
+  .splash-eyebrow { color: var(--mid-purple); letter-spacing: 0.3em; }
+  .splash-subtitle { color: var(--mid-purple); }
+  .splash-author { color: var(--mid-purple); }
+  .saved-indicator { color: var(--mid-purple); }
+
+  /* Splash divider — pink */
+  .splash-divider { background: var(--pink); }
+
+  /* Journal header */
+  .journal-header h2 { color: var(--deep-purple); }
+  .journal-entry-question { color: var(--deep-purple); }
+  .journal-entry-label { color: var(--mid-purple); }
+
+  /* Response areas — QT brand */
+  .response-area:focus { border-bottom-color: var(--pink); }
+  .response-area-dark:focus { border-bottom-color: var(--pink); }
+
+  /* Prompt number */
+  .prompt-number { color: var(--pink); }
+
+  /* Prompt question */
+  .prompt-question { color: var(--deep-purple); }
+
+  /* Prose */
+  .prose { color: var(--body-text); }
+  .prose .line-break { color: var(--mid-purple); }
+
+  /* Chapter label in divider */
+  .chapter-label { color: var(--mid-purple); }
+  .chapter-line { background: var(--stone); }
+  .chapter-subtitle { color: var(--mid-purple); }
+
+
+
+  /* ── TAB ELEMENTS ── */
+  .tab-stage-label {
+    font-size: 9px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin: 48px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--stone);
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+  }
+
+  .tab-exercise-card {
+    background: var(--soft-lavender);
+    border-left: 3px solid var(--accent);
+    padding: 24px 28px;
+    margin-bottom: 20px;
+    border-radius: 0 4px 4px 0;
+  }
+
+  .tab-exercise-meta {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--deep-purple);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    font-family: 'Lato', sans-serif;
+  }
+
+  .tab-exercise-context {
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--mid-purple);
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+
+  .tab-exercise-step {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 6px;
+    font-family: 'Lato', sans-serif;
+  }
+
+  .tab-exercise-desc {
+    font-size: 14px;
+    color: var(--body-text);
+    margin-bottom: 8px;
+    line-height: 1.6;
+  }
+
+  .tab-exercise-card .response-area {
+    background: rgba(255,255,255,0.6);
+  }
+
+  .tab-exercise-card .prompt-item {
+    margin-bottom: 24px;
+  }
+
+</style>
+</head>
+<body>
+
+<!-- SPLASH -->
+<div id="splash">
+  <p class="splash-eyebrow">The Companion Practice Guide</p>
+  <div class="stage-number" style="position:relative;font-size:80px;color:rgba(61,15,153,0.08);transform:none;left:auto;letter-spacing:0.15em;font-weight:700;">QT</div>
+  <h1 class="splash-title">Quietly <em>Tough</em></h1>
+  <p class="splash-subtitle">The Art of Calm Strength</p>
+  <p class="splash-author">Audrey Finch &nbsp;·&nbsp; Bridgemuir Publishing</p>
+  <div class="splash-divider"></div>
+  <div style="display:flex;align-items:center;gap:16px;margin:0 auto 40px;width:200px;opacity:0;animation:fadeUp 0.8s 0.9s forwards;">
+    <div style="flex:1;height:1px;background:var(--stone);"></div>
+    <div style="width:6px;height:6px;border-radius:50%;background:var(--pink);"></div>
+    <div style="flex:1;height:1px;background:var(--stone);"></div>
+  </div>
+  <button class="begin-btn" onclick="startApp()">Begin Your Practice</button>
+  <p class="saved-indicator" id="savedNote">Your responses are saved privately on this device</p>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <div class="top-bar">
+    <div class="top-logo" onclick="showSection('guide')">Quietly <em>Tough</em></div>
+    <div class="top-nav">
+      <button class="nav-btn active" id="btn-guide" onclick="showSection('guide')">Guide</button>
+      <button class="nav-btn" id="btn-trythis" onclick="showSection('trythis')">Try This</button>
+      <button class="nav-btn" id="btn-reflections" onclick="showSection('reflections')">Reflections</button>
+    </div>
+    <div class="save-status" id="saveStatus">Saved ✓</div>
+  </div>
+
+  <div class="main">
+
+    <!-- GUIDE SECTION -->
+    <div id="section-guide">
+
+      <!-- PROGRESS -->
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill" style="width:0%"></div>
+      </div>
+      <p class="progress-label" id="progressLabel">Stage 1 of 6 — Fog</p>
+
+      <!-- STAGE 1 HEADER -->
+      <div class="stage-header">
+        <div class="stage-number">01</div>
+        <div class="stage-tag">Stage One</div>
+        <h1 class="stage-title">FOG</h1>
+        <p class="stage-subtitle">Recognising the Drift</p>
+      </div>
+
+      <div class="prose">
+        <p>There's a moment — sometimes small, sometimes unmistakable — when something no longer feels aligned.</p>
+        <p>Nothing dramatic has happened. Your life still works. You're still capable, still dependable, still doing what needs to be done.</p>
+        <p><span class="line-break">And yet, something feels muted.</span></p>
+        <p>This stage is about noticing that feeling without trying to explain it away or fix it. Fog doesn't mean you've failed. It doesn't mean you're lost. It means you've been moving on autopilot for long enough that your inner signal has softened.</p>
+        <p><span class="line-break">That's not a flaw.</span><span class="line-break">It's information.</span></p>
+        <p>This stage asks very little of you. You are not here to make decisions. You are not here to take action. You are not here to improve anything.</p>
+        <p><span class="line-break">You're here to notice.</span></p>
+      </div>
+
+      <!-- STAGE 1 REFLECTION -->
+      <div class="reflection-block">
+        <div class="reflection-title">Reflection Prompts — Before You Begin</div>
+        <div class="reflection-intro">Take a breath. Let your shoulders drop. You don't need to hold anything together here.</div>
+
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 01</div>
+          <div class="prompt-question">Where does something in your life feel slightly off — even if you can't explain why yet?</div>
+          <textarea class="response-area" data-key="s1_r1" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 02</div>
+          <div class="prompt-question">Where are you continuing out of habit rather than desire?</div>
+          <textarea class="response-area" data-key="s1_r2" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 03</div>
+          <div class="prompt-question">Where does "fine" feel thinner than it used to?</div>
+          <textarea class="response-area" data-key="s1_r3" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 04</div>
+          <div class="prompt-question">What part of you has been asking for your attention — quietly, and repeatedly?</div>
+          <textarea class="response-area" data-key="s1_r4" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 05</div>
+          <div class="prompt-question">What have you been avoiding naming?</div>
+          <textarea class="response-area" data-key="s1_r5" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+      </div>
+
+      <!-- CHAPTER 1 -->
+      <div class="chapter-divider">
+        <div class="chapter-line"></div>
+        <div class="chapter-label">Chapter One</div>
+        <div class="chapter-line"></div>
+      </div>
+
+      <h2 class="chapter-title">The Myth of Midlife Decline</h2>
+      <p class="chapter-subtitle">Reclaiming the Middle as a Place of Power</p>
+
+      <div class="prose">
+        <p>There's a point in many women's lives where the story they've been living no longer fits — not because it was wrong, but because it's outdated.</p>
+        <p>Midlife is often framed as a narrowing: fewer options, reduced relevance, quieter ambitions. That narrative is absorbed slowly, through culture, language, and expectation — until it starts shaping how you interpret your own restlessness.</p>
+        <p><span class="line-break">But fog doesn't appear because something is ending.</span><span class="line-break">It appears when something is shifting.</span></p>
+        <p>This chapter isn't about proving anything or reframing your entire life story. It's about noticing which ideas about this stage of life you've been carrying — and whether they still deserve your belief.</p>
+      </div>
+
+      <div class="try-this-block">
+        <span class="try-this-tag">Try This</span>
+        <div class="try-this-title">Rewrite the Inherited Story</div>
+        <p class="try-this-intro">This exercise invites you to pause and register how things feel, without trying to clarify or resolve them. You're simply allowing yourself to notice what's present.</p>
+
+        <div class="step-block">
+          <div class="step-label">Version A — The Inherited Script</div>
+          <div class="step-desc">Write the messages you absorbed about midlife — directly or indirectly. Phrases. Assumptions. Expectations. Don't edit.</div>
+          <textarea class="response-area-dark" data-key="c1_try_a" placeholder="Write freely…" oninput="saveResponse(this)"></textarea>
+        </div>
+
+        <div class="step-block">
+          <div class="step-label">Version B — Your Lived Truth</div>
+          <div class="step-desc">Now write what this stage actually feels like from the inside. What's changed? What's surfaced? What feels unfinished or newly possible? Circle any words or phrases that feel alive.</div>
+          <textarea class="response-area-dark" data-key="c1_try_b" placeholder="Write freely…" oninput="saveResponse(this)"></textarea>
+        </div>
+      </div>
+
+      <div class="reflection-block">
+        <div class="reflection-title">Reflection Prompts — Chapter One</div>
+        <div class="reflection-intro">These prompts help you recognise what you've just noticed, without needing to interpret or resolve it. Answer only what feels accessible.</div>
+
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 01</div>
+          <div class="prompt-question">What beliefs about this stage of life feel heavy or limiting?</div>
+          <textarea class="response-area" data-key="c1_r1" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 02</div>
+          <div class="prompt-question">What possibility feels quietly interesting — even if you'd normally dismiss it?</div>
+          <textarea class="response-area" data-key="c1_r2" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 03</div>
+          <div class="prompt-question">What changes when you stop treating this "middle" as an ending?</div>
+          <textarea class="response-area" data-key="c1_r3" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+      </div>
+
+      <div class="closing-nudge">
+        <div class="closing-nudge-label">Closing Nudge</div>
+        <p>You're not diminishing.<br>You're differentiating.<br><br>Let that land.</p>
+      </div>
+
+      <!-- CHAPTER 2 -->
+      <div class="chapter-divider">
+        <div class="chapter-line"></div>
+        <div class="chapter-label">Chapter Two</div>
+        <div class="chapter-line"></div>
+      </div>
+
+      <h2 class="chapter-title">The Comfort Zone Trap</h2>
+      <p class="chapter-subtitle">When Competence Becomes a Cage</p>
+
+      <div class="prose">
+        <p>Competence is a strength. It's also subtle.</p>
+        <p>When you're highly capable, you become trusted. Relied upon. Needed. And without noticing, your life can begin to organise itself around maintaining what works rather than exploring what still fits.</p>
+        <p><span class="line-break">This isn't burnout. It isn't dissatisfaction. It's misalignment.</span></p>
+        <p>Fog often appears when your life is stable, but internally static.</p>
+        <p>This chapter isn't asking you to disrupt anything. It's inviting you to notice where routine has replaced choice, and where comfort has quietly become confinement.</p>
+      </div>
+
+      <div class="try-this-block">
+        <span class="try-this-tag">Try This</span>
+        <div class="try-this-title">Micro-Stretch Mapping</div>
+        <p class="try-this-intro">This exercise invites you to notice how your days currently arrange themselves. You're looking at what gets maintained, repeated, or protected — without questioning why.</p>
+
+        <div class="table-exercise" style="background:rgba(255,255,255,0.04);padding:0;margin-top:0;">
+          <table class="exercise-table">
+            <thead>
+              <tr>
+                <th>Autopilot Routine</th>
+                <th>What Keeps It in Place</th>
+                <th>A 5% Shift</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><textarea class="table-cell-input" data-key="c2_t1a" placeholder="e.g. checking emails first thing" oninput="saveResponse(this)"></textarea></td>
+                <td><textarea class="table-cell-input" data-key="c2_t1b" placeholder="e.g. habit, identity" oninput="saveResponse(this)"></textarea></td>
+                <td><textarea class="table-cell-input" data-key="c2_t1c" placeholder="e.g. wait 30 mins" oninput="saveResponse(this)"></textarea></td>
+              </tr>
+              <tr>
+                <td><textarea class="table-cell-input" data-key="c2_t2a" placeholder="" oninput="saveResponse(this)"></textarea></td>
+                <td><textarea class="table-cell-input" data-key="c2_t2b" placeholder="" oninput="saveResponse(this)"></textarea></td>
+                <td><textarea class="table-cell-input" data-key="c2_t2c" placeholder="" oninput="saveResponse(this)"></textarea></td>
+              </tr>
+              <tr>
+                <td><textarea class="table-cell-input" data-key="c2_t3a" placeholder="" oninput="saveResponse(this)"></textarea></td>
+                <td><textarea class="table-cell-input" data-key="c2_t3b" placeholder="" oninput="saveResponse(this)"></textarea></td>
+                <td><textarea class="table-cell-input" data-key="c2_t3c" placeholder="" oninput="saveResponse(this)"></textarea></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="reflection-block">
+        <div class="reflection-title">Reflection Prompts — Chapter Two</div>
+        <div class="reflection-intro">These prompts help you recognise patterns that keep things running smoothly. Stay with what you observed, rather than what you think about it.</div>
+
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 01</div>
+          <div class="prompt-question">Where does repetition feel dull rather than grounding?</div>
+          <textarea class="response-area" data-key="c2_r1" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 02</div>
+          <div class="prompt-question">What responsibility are you carrying simply because you always have?</div>
+          <textarea class="response-area" data-key="c2_r2" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 03</div>
+          <div class="prompt-question">What small risk feels quietly relieving to imagine?</div>
+          <textarea class="response-area" data-key="c2_r3" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+      </div>
+
+      <div class="closing-nudge">
+        <div class="closing-nudge-label">Closing Nudge</div>
+        <p>Change rarely starts with a leap.<br>It starts with noticing where you're standing.</p>
+      </div>
+
+      <!-- CHAPTER 3 -->
+      <div class="chapter-divider">
+        <div class="chapter-line"></div>
+        <div class="chapter-label">Chapter Three</div>
+        <div class="chapter-line"></div>
+      </div>
+
+      <h2 class="chapter-title">Meeting Your Inner Voice</h2>
+      <p class="chapter-subtitle">Understanding the Narrator You've Been Living With</p>
+
+      <div class="prose">
+        <p>There's a voice inside you that comments, cautions, and narrates — often without your consent.</p>
+        <p><span class="line-break">It appears when you hesitate.</span><span class="line-break">When you consider change.</span><span class="line-break">When you're tired.</span></p>
+        <p>This voice isn't the enemy. It developed to protect you — using rules that once made sense. But those rules may no longer match the life you're living now.</p>
+        <p>This chapter isn't about silencing that voice. It's about meeting it — and noticing what it's been trying to manage on your behalf.</p>
+      </div>
+
+      <div class="try-this-block">
+        <span class="try-this-tag">Try This</span>
+        <div class="try-this-title">A Simple Dialogue</div>
+        <p class="try-this-intro">This exercise invites you to notice the inner voice and emotional signals as they appear, without responding to them. You're allowing them to register, not asking them to explain themselves.</p>
+
+        <div class="step-block">
+          <div class="step-label">In the centre of the page, write:</div>
+          <div class="step-desc" style="font-size:20px;color:var(--warm-white);font-style:italic;">"What are you trying to protect me from?"</div>
+          <div style="margin-top:8px;font-size:13px;color:var(--stone);">Let the response come without editing.</div>
+          <textarea class="response-area-dark" data-key="c3_try_a" placeholder="Write freely…" oninput="saveResponse(this)" style="min-height:120px;"></textarea>
+        </div>
+
+        <div class="step-block">
+          <div class="step-label">Now write back — briefly.</div>
+          <div class="step-desc">What does this voice need to hear from me now?</div>
+          <textarea class="response-area-dark" data-key="c3_try_b" placeholder="Write freely…" oninput="saveResponse(this)"></textarea>
+        </div>
+
+        <div class="step-block">
+          <div class="step-label">Pause when you're done.</div>
+          <div class="step-desc">Notice what shifts.</div>
+          <textarea class="response-area-dark" data-key="c3_try_c" placeholder="What do you notice?" oninput="saveResponse(this)"></textarea>
+        </div>
+      </div>
+
+      <div class="reflection-block">
+        <div class="reflection-title">Reflection Prompts — Chapter Three</div>
+        <div class="reflection-intro">These questions support gentle recognition of what surfaced. There's no need to make meaning yet.</div>
+
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 01</div>
+          <div class="prompt-question">When does your inner voice speak the loudest?</div>
+          <textarea class="response-area" data-key="c3_r1" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 02</div>
+          <div class="prompt-question">What tone does it usually use?</div>
+          <textarea class="response-area" data-key="c3_r2" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 03</div>
+          <div class="prompt-question">What does it seem most concerned about losing?</div>
+          <textarea class="response-area" data-key="c3_r3" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+      </div>
+
+      <div class="closing-nudge">
+        <div class="closing-nudge-label">Closing Nudge</div>
+        <p>Your inner voice isn't evidence of weakness.<br>It's evidence of care.<br><br>You don't need to resolve anything yet.</p>
+      </div>
+
+      <!-- STAGE 1 CLOSE -->
+      <div class="stage-close">
+        <div class="stage-close-label">Stage One — Complete</div>
+        <h2>FOG — Integration</h2>
+        <div class="stage-close-prose">
+          <p>You've noticed what no longer fits.</p>
+          <p style="margin-top:16px;">You've seen where habit replaced choice, where strength became expectation, and where "fine" stopped being enough.</p>
+          <p style="margin-top:16px;">Most importantly, you didn't rush to fix any of it.</p>
+          <p style="margin-top:24px;"><span class="highlight">That matters.</span></p>
+          <p style="margin-top:24px;">Fog is not the problem.<br>It's the signal.</p>
+          <p style="margin-top:16px;">You don't need to clear it yet.<br>You just need to know it's there.</p>
+        </div>
+      </div>
+
+
+      <!-- STAGE 2 -->
+      <div class="stage-header">
+        <div class="stage-number">02</div>
+        <div class="stage-tag">Stage Two</div>
+        <h1 class="stage-title">FILTER</h1>
+        <p class="stage-subtitle">Quiet the Noise</p>
+      </div>
+
+      <div class="prose">
+        <p>By the time you reach this stage, something subtle has shifted.</p>
+        <p>You're no longer moving through the fog blindly. You've noticed it — and now you're aware of how much noise you've been carrying.</p>
+        <p><span class="line-break">Noise isn't always loud.</span>Often it's internal: the running commentary, the mental to-do lists, the expectations you've absorbed without question.</p>
+        <p>Filtering isn't about withdrawing from your life. It's about choosing what gets access to you.</p>
+        <p>This stage is where you begin to distinguish between what supports your clarity — and what quietly drains it.</p>
+      </div>
+
+      <div class="reflection-block">
+        <div class="reflection-title">Reflection Prompts — Before You Begin</div>
+        <div class="reflection-intro">Take a breath. Let your shoulders drop. Notice where you are right now — not where you should be.</div>
+
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 01</div>
+          <div class="prompt-question">What currently takes up more mental space than it deserves?</div>
+          <textarea class="response-area" data-key="s2_r1" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 02</div>
+          <div class="prompt-question">Which expectations feel inherited rather than chosen?</div>
+          <textarea class="response-area" data-key="s2_r2" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 03</div>
+          <div class="prompt-question">Where do you feel mentally crowded or overstimulated?</div>
+          <textarea class="response-area" data-key="s2_r3" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 04</div>
+          <div class="prompt-question">What happens in your body when you imagine a little less input?</div>
+          <textarea class="response-area" data-key="s2_r4" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+      </div>
+      <!-- CHAPTER 4 -->
+      <div class="chapter-divider">
+        <div class="chapter-line"></div>
+        <div class="chapter-label">Chapter Four</div>
+        <div class="chapter-line"></div>
+      </div>
+
+      <h2 class="chapter-title">Mindfulness Isn't a Buzzword</h2>
+      <p class="chapter-subtitle">Reclaiming Your Attention</p>
+
+      <div class="prose">
+        <p>Mindfulness is often misunderstood as calm, stillness, or emptying the mind.</p>
+        <p>Attention is a skill. And like any skill, it shapes what you experience — not by force, but by repetition.</p>
+        <p>Much of the noise you carry isn't caused by what's happening around you. It's caused by where your attention keeps returning.</p>
+        <p>This chapter isn't about meditation. It's about noticing where your mind goes — and gently choosing where to bring it back.</p>
+      </div>
+
+      <div class="try-this-block">
+        <span class="try-this-tag">Try This</span>
+        <div class="try-this-title">A Simple Attention Reset</div>
+        <p class="try-this-intro">This exercise invites you to notice where your attention drifts, without trying to correct it. You're building awareness of your own mental habits — not changing them yet.</p>
+        <div class="step-block">
+          <div class="step-label">Right now, what is your mind doing?</div>
+          <div class="step-desc">Replaying something? Planning? Worrying? Just notice.</div>
+          <textarea class="response-area-dark" data-key="c4_try_a" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="step-block">
+          <div class="step-label">Where does it go most often when left unattended?</div>
+          <div class="step-desc">Name the pattern, not the content.</div>
+          <textarea class="response-area-dark" data-key="c4_try_b" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="step-block">
+          <div class="step-label">What would change if you redirected it, gently, just once today?</div>
+          <div class="step-desc">One small act of deliberate attention.</div>
+          <textarea class="response-area-dark" data-key="c4_try_c" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+      </div>
+
+      <div class="reflection-block">
+        <div class="reflection-title">Reflection Prompts — Chapter Four</div>
+        <div class="reflection-intro">These prompts help you explore your relationship with attention. Stay with what feels honest.</div>
+
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 01</div>
+          <div class="prompt-question">Where does your attention feel most scattered?</div>
+          <textarea class="response-area" data-key="c4_r1" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 02</div>
+          <div class="prompt-question">What pulls you out of the present moment most reliably?</div>
+          <textarea class="response-area" data-key="c4_r2" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 03</div>
+          <div class="prompt-question">What changes when you notice where your mind has gone, without judging it?</div>
+          <textarea class="response-area" data-key="c4_r3" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+      </div>
+
+      <div class="closing-nudge">
+        <div class="closing-nudge-label">Closing Nudge</div>
+        <p>Attention isn't about control.<br>It's about return.</p>
+      </div>
+      <!-- CHAPTER 5 -->
+      <div class="chapter-divider">
+        <div class="chapter-line"></div>
+        <div class="chapter-label">Chapter Five</div>
+        <div class="chapter-line"></div>
+      </div>
+
+      <h2 class="chapter-title">The Quiet "No"</h2>
+      <p class="chapter-subtitle">Creating Space Without Conflict</p>
+
+      <div class="prose">
+        <p>In reality, most boundaries are quiet.</p>
+        <p><span class="line-break">They show up as pauses.</span><span class="line-break">As delayed responses.</span><span class="line-break">As choosing not to absorb what isn't yours.</span></p>
+        <p>This chapter isn't about asserting yourself. It's about noticing where your capacity leaks — and allowing yourself to hold it.</p>
+      </div>
+
+      <div class="try-this-block">
+        <span class="try-this-tag">Try This</span>
+        <div class="try-this-title">The Gentle No</div>
+        <p class="try-this-intro">This exercise invites you to observe where responsibility has become pressure. Choose one low-stakes situation where you usually over-extend.</p>
+        <div class="step-block">
+          <div class="step-label">Name the moment — what is being asked of you?</div>
+          <div class="step-desc">Be specific and factual.</div>
+          <textarea class="response-area-dark" data-key="c5_try_a" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="step-block">
+          <div class="step-label">Before responding, take one breath. Then respond simply.</div>
+          <div class="step-desc">Examples: "I don't have capacity for that." / "That won't work for me." Write your version here.</div>
+          <textarea class="response-area-dark" data-key="c5_try_b" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="step-block">
+          <div class="step-label">Notice what happened — in your body, in the situation.</div>
+          <div class="step-desc">Even a small observation counts.</div>
+          <textarea class="response-area-dark" data-key="c5_try_c" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+      </div>
+
+      <div class="reflection-block">
+        <div class="reflection-title">Reflection Prompts — Chapter Five</div>
+        <div class="reflection-intro">These prompts help you notice where obligation lives for you. Stay with what's factual, not what's expected.</div>
+
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 01</div>
+          <div class="prompt-question">Where does saying yes feel automatic rather than intentional?</div>
+          <textarea class="response-area" data-key="c5_r1" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 02</div>
+          <div class="prompt-question">What emotion comes up when you imagine not responding immediately?</div>
+          <textarea class="response-area" data-key="c5_r2" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 03</div>
+          <div class="prompt-question">What did this small boundary protect?</div>
+          <textarea class="response-area" data-key="c5_r3" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+      </div>
+
+      <div class="closing-nudge">
+        <div class="closing-nudge-label">Closing Nudge</div>
+        <p>A quiet no creates space — without drama.</p>
+      </div>
+      <!-- CHAPTER 6 -->
+      <div class="chapter-divider">
+        <div class="chapter-line"></div>
+        <div class="chapter-label">Chapter Six</div>
+        <div class="chapter-line"></div>
+      </div>
+
+      <h2 class="chapter-title">Creating White Space</h2>
+      <p class="chapter-subtitle">Letting Clarity Breathe Again</p>
+
+      <div class="prose">
+        <p>Modern life fills every available space. Calendars. Screens. Conversations. Thoughts. Even rest gets crowded.</p>
+        <p>White space isn't an indulgence. It's what allows clarity to land.</p>
+        <p>This chapter isn't asking you to simplify your life. It's inviting you to notice where a little space changes how you feel.</p>
+      </div>
+
+      <div class="try-this-block">
+        <span class="try-this-tag">Try This</span>
+        <div class="try-this-title">Five Minutes of Space</div>
+        <p class="try-this-intro">Choose one small area to clear — physical, digital, or mental. The aim isn't improvement. It's noticing what changes when something is no longer there.</p>
+        <div class="step-block">
+          <div class="step-label">Remove one thing</div>
+          <div class="step-desc">An object. A notification. A thought you've been carrying.</div>
+          <textarea class="response-area-dark" data-key="c6_try_a" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="step-block">
+          <div class="step-label">Sit with the space — notice your body's response</div>
+          <div class="step-desc">What do you feel when something is simply… gone?</div>
+          <textarea class="response-area-dark" data-key="c6_try_b" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="step-block">
+          <div class="step-label">Capture what shifted — one line is enough</div>
+          <div class="step-desc">Not an analysis. Just an observation.</div>
+          <textarea class="response-area-dark" data-key="c6_try_c" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+      </div>
+
+      <div class="reflection-block">
+        <div class="reflection-title">Reflection Prompts — Chapter Six</div>
+        <div class="reflection-intro">These prompts help you recognise the effect of creating space, rather than evaluating the choice itself.</div>
+
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 01</div>
+          <div class="prompt-question">Which kind of noise drains you fastest?</div>
+          <textarea class="response-area" data-key="c6_r1" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 02</div>
+          <div class="prompt-question">Where do you crave more breathing room?</div>
+          <textarea class="response-area" data-key="c6_r2" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 03</div>
+          <div class="prompt-question">What does clarity feel like in your body?</div>
+          <textarea class="response-area" data-key="c6_r3" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+      </div>
+
+      <div class="closing-nudge">
+        <div class="closing-nudge-label">Closing Nudge</div>
+        <p>Clarity doesn't arrive through effort.<br>It arrives when there's room.</p>
+      </div>
+      <!-- STAGE 2 CLOSE -->
+      <div class="stage-close">
+        <div class="stage-close-label">Stage Two — Complete</div>
+        <h2>FILTER — Integration</h2>
+        <div class="stage-close-prose">
+          <p style="margin-top:16px;">You've begun to distinguish between signal and static.</p>
+          <p style="margin-top:16px;">You've noticed where your attention drifts. Where your energy leaks. Where space restores more than effort ever did.</p>
+          <p style="margin-top:16px;">Nothing needed to be forced. Nothing needed to be explained. You simply became more selective.</p>
+          <p style="margin-top:16px;"><span class="highlight">When the noise softens, your inner signal becomes clearer — without you chasing it.</span></p>
+        </div>
+      </div>
+      <!-- STAGE 3 -->
+      <div class="stage-header">
+        <div class="stage-number">03</div>
+        <div class="stage-tag">Stage Three</div>
+        <h1 class="stage-title">FOCUS</h1>
+        <p class="stage-subtitle">Reconnect with What Matters</p>
+      </div>
+
+      <div class="prose">
+        <p>By now, the fog has thinned, and the noise has softened.</p>
+        <p><span class="line-break">There is space.</span>Not the kind that demands decisions — the kind that allows you to hear yourself again.</p>
+        <p>Focus isn't about intensity or effort. It's about alignment — the quiet sense that your energy is landing in the right places.</p>
+        <p>This stage isn't about ambition or reinvention. It's about selecting — gently, honestly — what deserves your attention moving forward.</p>
+      </div>
+
+      <div class="reflection-block">
+        <div class="reflection-title">Reflection Prompts — Before You Begin</div>
+        <div class="reflection-intro">Take a breath. Let your shoulders drop. Notice where you are right now — not where you should be.</div>
+
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 01</div>
+          <div class="prompt-question">What activities or moments reliably bring you back to yourself?</div>
+          <textarea class="response-area" data-key="s3_r1" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 02</div>
+          <div class="prompt-question">Where does your energy drain without giving much in return?</div>
+          <textarea class="response-area" data-key="s3_r2" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 03</div>
+          <div class="prompt-question">What feels aligned in your life right now — even quietly?</div>
+          <textarea class="response-area" data-key="s3_r3" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 04</div>
+          <div class="prompt-question">What feels inherited rather than chosen?</div>
+          <textarea class="response-area" data-key="s3_r4" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+      </div>
+      <!-- CHAPTER 7 -->
+      <div class="chapter-divider">
+        <div class="chapter-line"></div>
+        <div class="chapter-label">Chapter Seven</div>
+        <div class="chapter-line"></div>
+      </div>
+
+      <h2 class="chapter-title">Core Values</h2>
+      <p class="chapter-subtitle">What Anchors You Now</p>
+
+      <div class="prose">
+        <p>Values don't announce themselves.</p>
+        <p><span class="line-break">They reveal themselves through patterns.</span><span class="line-break">Through what you tolerate.</span><span class="line-break">Through what you protect.</span><span class="line-break">Through what you return to when you're honest.</span></p>
+        <p>Often, values don't disappear — they drift into the background while life gets full. This chapter is about noticing which ones have been quietly guiding you — and whether they're still the right ones.</p>
+      </div>
+
+      <div class="try-this-block">
+        <span class="try-this-tag">Try This</span>
+        <div class="try-this-title">Finding What's Already There</div>
+        <p class="try-this-intro">This exercise invites you to notice your values as they already show up — not as aspirations, but as patterns in how you actually live.</p>
+        <div class="step-block">
+          <div class="step-label">Think of a recent decision you felt quietly good about.</div>
+          <div class="step-desc">What does it say about what you value? Name the value underneath it.</div>
+          <textarea class="response-area-dark" data-key="c7_try_a" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="step-block">
+          <div class="step-label">Think of something you repeatedly protect or make room for.</div>
+          <div class="step-desc">What value does that reflect?</div>
+          <textarea class="response-area-dark" data-key="c7_try_b" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="step-block">
+          <div class="step-label">Where does life currently feel most misaligned?</div>
+          <div class="step-desc">What value is being crowded out?</div>
+          <textarea class="response-area-dark" data-key="c7_try_c" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+      </div>
+
+      <div class="reflection-block">
+        <div class="reflection-title">Reflection Prompts — Chapter Seven</div>
+        <div class="reflection-intro">These prompts help you bring your values into clearer view. Answer only what feels accessible.</div>
+
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 01</div>
+          <div class="prompt-question">Which of your values feels most neglected right now?</div>
+          <textarea class="response-area" data-key="c7_r1" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 02</div>
+          <div class="prompt-question">Where are you living most closely in line with what matters to you?</div>
+          <textarea class="response-area" data-key="c7_r2" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 03</div>
+          <div class="prompt-question">What would change if one neglected value received more of your attention?</div>
+          <textarea class="response-area" data-key="c7_r3" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+      </div>
+
+      <div class="closing-nudge">
+        <div class="closing-nudge-label">Closing Nudge</div>
+        <p>You already live your values.<br>Now you're learning to notice them.</p>
+      </div>
+      <!-- CHAPTER 8 -->
+      <div class="chapter-divider">
+        <div class="chapter-line"></div>
+        <div class="chapter-label">Chapter Eight</div>
+        <div class="chapter-line"></div>
+      </div>
+
+      <h2 class="chapter-title">Intentional Goals</h2>
+      <p class="chapter-subtitle">Choosing Direction Without Strain</p>
+
+      <div class="prose">
+        <p>Goals often outlive their usefulness.</p>
+        <p>What once motivated you may now feel heavy — not because you've failed, but because you've changed.</p>
+        <p>This chapter isn't about setting new targets. It's about noticing which directions still feel honest.</p>
+        <p><span class="line-break">Intentional goals don't push you forward.</span><span class="line-break">They draw you toward something that fits.</span></p>
+      </div>
+
+      <div class="try-this-block">
+        <span class="try-this-tag">Try This</span>
+        <div class="try-this-title">The Alignment Check</div>
+        <p class="try-this-intro">Choose one goal, desire, or idea that's been circling in your mind. This exercise isn't about evaluating ambition — it's about noticing how the goal feels when you meet it honestly.</p>
+        <div class="step-block">
+          <div class="step-label">Name the goal or direction</div>
+          <div class="step-desc">Write it plainly, without justification.</div>
+          <textarea class="response-area-dark" data-key="c8_try_a" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="step-block">
+          <div class="step-label">Does this energise me or drain me? Is this for who I am now — or who I used to be?</div>
+          <div class="step-desc">Answer simply. Trust your first response.</div>
+          <textarea class="response-area-dark" data-key="c8_try_b" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="step-block">
+          <div class="step-label">Would I pursue this if no one expected anything of me?</div>
+          <div class="step-desc">If yes, what does that tell you? If no, what does that tell you?</div>
+          <textarea class="response-area-dark" data-key="c8_try_c" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+      </div>
+
+      <div class="reflection-block">
+        <div class="reflection-title">Reflection Prompts — Chapter Eight</div>
+        <div class="reflection-intro">These prompts help you explore what happens when you stop justifying your goals and start listening to your response to them.</div>
+
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 01</div>
+          <div class="prompt-question">What goals no longer reflect who you are?</div>
+          <textarea class="response-area" data-key="c8_r1" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 02</div>
+          <div class="prompt-question">What direction feels lighter — even if it's less impressive?</div>
+          <textarea class="response-area" data-key="c8_r2" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 03</div>
+          <div class="prompt-question">What would change if you allowed yourself to want less, but want it more honestly?</div>
+          <textarea class="response-area" data-key="c8_r3" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+      </div>
+
+      <div class="closing-nudge">
+        <div class="closing-nudge-label">Closing Nudge</div>
+        <p>Direction becomes clearer when you stop aiming for what looks right — and start noticing what feels right.</p>
+      </div>
+      <!-- CHAPTER 9 -->
+      <div class="chapter-divider">
+        <div class="chapter-line"></div>
+        <div class="chapter-label">Chapter Nine</div>
+        <div class="chapter-line"></div>
+      </div>
+
+      <h2 class="chapter-title">Reframing Self-Doubt</h2>
+      <p class="chapter-subtitle">When Hesitation Carries Information</p>
+
+      <div class="prose">
+        <p>Self-doubt often appears when focus sharpens.</p>
+        <p>Not because you're incapable — but because you're closer to choosing something that matters.</p>
+        <p>At this stage of life, doubt is rarely about ability. It's about permission.</p>
+        <p>This chapter isn't here to remove doubt. It's here to help you recognise what it's pointing to.</p>
+      </div>
+
+      <div class="try-this-block">
+        <span class="try-this-tag">Try This</span>
+        <div class="try-this-title">Listening to the Signal</div>
+        <p class="try-this-intro">This exercise invites you to listen to self-doubt without trying to silence it or argue with it. Rather than treating doubt as a warning to stop, you're approaching it as a signal that something meaningful is at stake.</p>
+        <div class="step-block">
+          <div class="step-label">The doubt says…</div>
+          <div class="step-desc">Write the actual words, as close as you can. Don't edit.</div>
+          <textarea class="response-area-dark" data-key="c9_try_a" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="step-block">
+          <div class="step-label">It might be trying to protect me from…</div>
+          <div class="step-desc">Let the answer come without analysis.</div>
+          <textarea class="response-area-dark" data-key="c9_try_b" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="step-block">
+          <div class="step-label">What I actually need right now is…</div>
+          <div class="step-desc">Reassurance, preparation, rest, clarity, support — name one.</div>
+          <textarea class="response-area-dark" data-key="c9_try_c" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+      </div>
+
+      <div class="reflection-block">
+        <div class="reflection-title">Reflection Prompts — Chapter Nine</div>
+        <div class="reflection-intro">These prompts help you explore when doubt tends to surface and what it seems to be protecting.</div>
+
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 01</div>
+          <div class="prompt-question">When does self-doubt tend to appear most strongly for you?</div>
+          <textarea class="response-area" data-key="c9_r1" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 02</div>
+          <div class="prompt-question">What does it seem most concerned about?</div>
+          <textarea class="response-area" data-key="c9_r2" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 03</div>
+          <div class="prompt-question">What changes when you treat doubt as information rather than instruction?</div>
+          <textarea class="response-area" data-key="c9_r3" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+      </div>
+
+      <div class="closing-nudge">
+        <div class="closing-nudge-label">Closing Nudge</div>
+        <p>Self-doubt isn't a stop sign.<br>It's a signal that something matters.</p>
+      </div>
+      <!-- STAGE 3 CLOSE -->
+      <div class="stage-close">
+        <div class="stage-close-label">Stage Three — Complete</div>
+        <h2>FOCUS — Integration</h2>
+        <div class="stage-close-prose">
+          <p style="margin-top:16px;">You've begun to notice what deserves your energy.</p>
+          <p style="margin-top:16px;">Not everything. Just what matters.</p>
+          <p style="margin-top:16px;">You've seen where your values surface naturally. Where direction feels lighter. Where hesitation carries information rather than threat.</p>
+          <p style="margin-top:16px;">Nothing needed to be resolved. Nothing needed to be forced.</p>
+          <p style="margin-top:16px;"><span class="highlight">Focus isn't something you create. It's something that returns when the noise is quiet enough.</span></p>
+        </div>
+      </div>
+      <!-- STAGE 4 -->
+      <div class="stage-header">
+        <div class="stage-number">04</div>
+        <div class="stage-tag">Stage Four</div>
+        <h1 class="stage-title">FLOW</h1>
+        <p class="stage-subtitle">Redesign Your Rhythm</p>
+      </div>
+
+      <div class="prose">
+        <p>By this stage, something important has already changed.</p>
+        <p><span class="line-break">You're no longer questioning what matters.</span><span class="line-break">You're noticing how your energy actually moves.</span></p>
+        <p>Flow isn't about doing more with ease. It's about moving through your days without resistance.</p>
+        <p>This stage invites you to stop negotiating with exhaustion and start listening to rhythm instead.</p>
+      </div>
+
+      <div class="reflection-block">
+        <div class="reflection-title">Reflection Prompts — Before You Begin</div>
+        <div class="reflection-intro">Take a breath. Let your shoulders drop. Notice where you are right now — not where you should be.</div>
+
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 01</div>
+          <div class="prompt-question">When during the day does your energy feel most natural?</div>
+          <textarea class="response-area" data-key="s4_r1" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 02</div>
+          <div class="prompt-question">When does it drop — not dramatically, but reliably?</div>
+          <textarea class="response-area" data-key="s4_r2" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 03</div>
+          <div class="prompt-question">Where do you feel yourself pushing when you don't need to?</div>
+          <textarea class="response-area" data-key="s4_r3" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 04</div>
+          <div class="prompt-question">What happens when you imagine moving at a slightly gentler pace?</div>
+          <textarea class="response-area" data-key="s4_r4" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+      </div>
+      <!-- CHAPTER 10 -->
+      <div class="chapter-divider">
+        <div class="chapter-line"></div>
+        <div class="chapter-label">Chapter Ten</div>
+        <div class="chapter-line"></div>
+      </div>
+
+      <h2 class="chapter-title">Energy Economics</h2>
+      <p class="chapter-subtitle">Where Your Energy Goes</p>
+
+      <div class="prose">
+        <p>Time is visible. Energy is not.</p>
+        <p>You can spend the same hour in very different ways — and feel entirely different afterwards. That's because energy, not time, is your real currency.</p>
+        <p>This chapter isn't about managing your days. It's about noticing where your energy expands — and where it quietly drains.</p>
+        <p><span class="line-break">Once you see that clearly, change becomes simpler.</span></p>
+      </div>
+
+      <div class="try-this-block">
+        <span class="try-this-tag">Try This</span>
+        <div class="try-this-title">A Gentle Energy Check</div>
+        <p class="try-this-intro">Look at a typical day through the lens of energy rather than time. For each part of the day, note how it affects you — expands, neutral, or drains. Trust your first sense.</p>
+
+        <div class="table-exercise">
+          <table class="exercise-table">
+            <thead>
+              <tr>
+                <th>Time of day &amp; what you do</th>
+                <th>Expands / Neutral / Drains</th>
+                <th>One small adjustment</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><textarea class="table-cell-input" data-key="c10_t1a" placeholder="Morning — e.g. checking emails" oninput="saveResponse(this)"></textarea></td>
+                <td><textarea class="table-cell-input" data-key="c10_t1b" placeholder="Drains" oninput="saveResponse(this)"></textarea></td>
+                <td><textarea class="table-cell-input" data-key="c10_t1c" placeholder="Wait 30 mins before opening" oninput="saveResponse(this)"></textarea></td>
+              </tr>
+              <tr>
+                <td><textarea class="table-cell-input" data-key="c10_t2a" placeholder="Midday" oninput="saveResponse(this)"></textarea></td>
+                <td><textarea class="table-cell-input" data-key="c10_t2b" placeholder="" oninput="saveResponse(this)"></textarea></td>
+                <td><textarea class="table-cell-input" data-key="c10_t2c" placeholder="" oninput="saveResponse(this)"></textarea></td>
+              </tr>
+              <tr>
+                <td><textarea class="table-cell-input" data-key="c10_t3a" placeholder="Evening" oninput="saveResponse(this)"></textarea></td>
+                <td><textarea class="table-cell-input" data-key="c10_t3b" placeholder="" oninput="saveResponse(this)"></textarea></td>
+                <td><textarea class="table-cell-input" data-key="c10_t3c" placeholder="" oninput="saveResponse(this)"></textarea></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="reflection-block">
+        <div class="reflection-title">Reflection Prompts — Chapter Ten</div>
+        <div class="reflection-intro">These prompts help you explore the patterns you noticed once energy became visible.</div>
+
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 01</div>
+          <div class="prompt-question">Which moment costs more energy than it deserves?</div>
+          <textarea class="response-area" data-key="c10_r1" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 02</div>
+          <div class="prompt-question">What expectation keeps that pattern in place?</div>
+          <textarea class="response-area" data-key="c10_r2" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 03</div>
+          <div class="prompt-question">What changes when you treat energy as information?</div>
+          <textarea class="response-area" data-key="c10_r3" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+      </div>
+
+      <div class="closing-nudge">
+        <div class="closing-nudge-label">Closing Nudge</div>
+        <p>Your energy isn't a problem.<br>It's a signal.</p>
+      </div>
+      <!-- CHAPTER 11 -->
+      <div class="chapter-divider">
+        <div class="chapter-line"></div>
+        <div class="chapter-label">Chapter Eleven</div>
+        <div class="chapter-line"></div>
+      </div>
+
+      <h2 class="chapter-title">Rest as Strategy</h2>
+      <p class="chapter-subtitle">Letting Recovery Live Inside the Day</p>
+
+      <div class="prose">
+        <p>Rest is often treated as something you earn. Or something you do once everything else is done.</p>
+        <p>That approach works — until it doesn't.</p>
+        <p>This chapter isn't about stopping. It's about recovering before you're depleted.</p>
+        <p><span class="line-break">Rest doesn't need to be dramatic to be effective.</span><span class="line-break">Often, it's a pause that arrives early enough.</span></p>
+      </div>
+
+      <div class="try-this-block">
+        <span class="try-this-tag">Try This</span>
+        <div class="try-this-title">A Short Reset</div>
+        <p class="try-this-intro">Choose one moment in your day where your energy dips slightly. Not a crisis — just a shift. This exercise invites you to introduce a small pause before strain sets in.</p>
+        <div class="step-block">
+          <div class="step-label">Name the moment where your energy dips</div>
+          <div class="step-desc">When does it happen? What triggers it?</div>
+          <textarea class="response-area-dark" data-key="c11_try_a" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="step-block">
+          <div class="step-label">Pause — one breath, release one place you hold tension</div>
+          <div class="step-desc">Jaw. Shoulders. Hands. What do you notice?</div>
+          <textarea class="response-area-dark" data-key="c11_try_b" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="step-block">
+          <div class="step-label">Continue — notice if anything feels different</div>
+          <div class="step-desc">Even a small shift counts. Write what you observe.</div>
+          <textarea class="response-area-dark" data-key="c11_try_c" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+      </div>
+
+      <div class="reflection-block">
+        <div class="reflection-title">Reflection Prompts — Chapter Eleven</div>
+        <div class="reflection-intro">These prompts help you notice where rest is usually delayed or resisted.</div>
+
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 01</div>
+          <div class="prompt-question">Where do you usually push instead of pause?</div>
+          <textarea class="response-area" data-key="c11_r1" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 02</div>
+          <div class="prompt-question">What belief makes rest feel inconvenient?</div>
+          <textarea class="response-area" data-key="c11_r2" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 03</div>
+          <div class="prompt-question">What changes when rest becomes preventative rather than reactive?</div>
+          <textarea class="response-area" data-key="c11_r3" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+      </div>
+
+      <div class="closing-nudge">
+        <div class="closing-nudge-label">Closing Nudge</div>
+        <p>Rest doesn't interrupt momentum.<br>It protects it.</p>
+      </div>
+      <!-- CHAPTER 12 -->
+      <div class="chapter-divider">
+        <div class="chapter-line"></div>
+        <div class="chapter-label">Chapter Twelve</div>
+        <div class="chapter-line"></div>
+      </div>
+
+      <h2 class="chapter-title">Momentum Over Motivation</h2>
+      <p class="chapter-subtitle">Moving Without Forcing</p>
+
+      <div class="prose">
+        <p>Motivation comes and goes.<br>Momentum stays.</p>
+        <p>Momentum isn't excitement. It's reliability. It's what builds when your actions are small enough to repeat — even on low-energy days.</p>
+        <p>This chapter isn't about discipline. It's about continuity.</p>
+      </div>
+
+      <div class="try-this-block">
+        <span class="try-this-tag">Try This</span>
+        <div class="try-this-title">One Small Loop</div>
+        <p class="try-this-intro">Choose one action that takes less than two minutes — something you could do even when tired. Link it to something you already do. Commit to this for one week. Not perfectly. Just consistently.</p>
+
+        <div class="table-exercise">
+          <table class="exercise-table">
+            <thead>
+              <tr>
+                <th>One action (under 2 minutes)</th>
+                <th>Something to link it to</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><textarea class="table-cell-input" data-key="c12_t1a" placeholder="e.g. one slow breath" oninput="saveResponse(this)"></textarea></td>
+                <td><textarea class="table-cell-input" data-key="c12_t1b" placeholder="e.g. before opening email" oninput="saveResponse(this)"></textarea></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="step-block" style="margin-top:24px;">
+          <div class="step-label">Capture any insights after one week</div>
+          <textarea class="response-area-dark" data-key="c12_insights" placeholder="What did you notice?" oninput="saveResponse(this)"></textarea>
+        </div>
+      </div>
+
+      <div class="reflection-block">
+        <div class="reflection-title">Reflection Prompts — Chapter Twelve</div>
+        <div class="reflection-intro">These prompts help you explore what supports continuity and what quietly interrupts it.</div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 01</div>
+          <div class="prompt-question">What makes this action easy to return to?</div>
+          <textarea class="response-area" data-key="c12_r1" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 02</div>
+          <div class="prompt-question">What usually breaks your momentum?</div>
+          <textarea class="response-area" data-key="c12_r2" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 03</div>
+          <div class="prompt-question">What shifts when you keep the loop alive?</div>
+          <textarea class="response-area" data-key="c12_r3" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+      </div>
+
+      <div class="closing-nudge">
+        <div class="closing-nudge-label">Closing Nudge</div>
+        <p>Momentum isn't built through effort.<br>It's built through return.</p>
+      </div>
+      <!-- STAGE 4 CLOSE -->
+      <div class="stage-close">
+        <div class="stage-close-label">Stage Four — Complete</div>
+        <h2>FLOW — Integration</h2>
+        <div class="stage-close-prose">
+          <p style="margin-top:16px;">You've begun to notice your rhythm.</p>
+          <p style="margin-top:16px;">Where energy expands. Where it leaks. Where a pause steadies more than force ever did.</p>
+          <p style="margin-top:16px;">You didn't overhaul anything. You adjusted how you move.</p>
+          <p style="margin-top:16px;">Flow doesn't ask for intensity. It asks for fit.</p>
+          <p style="margin-top:16px;"><span class="highlight">Let your pace be informed by your body, not your pressure.</span></p>
+        </div>
+      </div>
+      <!-- STAGE 5 -->
+      <div class="stage-header">
+        <div class="stage-number">05</div>
+        <div class="stage-tag">Stage Five</div>
+        <h1 class="stage-title">RISE</h1>
+        <p class="stage-subtitle">Lead Yourself with Calm Authority</p>
+      </div>
+
+      <div class="prose">
+        <p>By now, something has settled.</p>
+        <p>Not because life is easier — but because you're less reactive inside it.</p>
+        <p>You've learned how to notice without rushing. How to filter noise without withdrawing. How to move at a pace your system can sustain.</p>
+        <p><span class="line-break">What emerges next isn't force.</span><span class="line-break">It's authority.</span></p>
+        <p>Not the kind that announces itself — the kind that holds.</p>
+      </div>
+
+      <div class="reflection-block">
+        <div class="reflection-title">Reflection Prompts — Before You Begin</div>
+        <div class="reflection-intro">Take a breath. Let your shoulders drop. Notice where you are right now — not where you should be.</div>
+
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 01</div>
+          <div class="prompt-question">When do you feel most grounded in yourself?</div>
+          <textarea class="response-area" data-key="s5_r1" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 02</div>
+          <div class="prompt-question">What situations tend to pull you off-centre?</div>
+          <textarea class="response-area" data-key="s5_r2" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 03</div>
+          <div class="prompt-question">How do you usually respond when your calm is challenged?</div>
+          <textarea class="response-area" data-key="s5_r3" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 04</div>
+          <div class="prompt-question">What changes when you imagine responding more slowly?</div>
+          <textarea class="response-area" data-key="s5_r4" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+      </div>
+      <!-- CHAPTER 13 -->
+      <div class="chapter-divider">
+        <div class="chapter-line"></div>
+        <div class="chapter-label">Chapter Thirteen</div>
+        <div class="chapter-line"></div>
+      </div>
+
+      <h2 class="chapter-title">Emotional Agility</h2>
+      <p class="chapter-subtitle">Staying Steady When Things Are Charged</p>
+
+      <div class="prose">
+        <p>Emotions don't ask permission.</p>
+        <p>They rise quickly — in conversations, in moments of uncertainty, in situations where something matters.</p>
+        <p>Emotional agility isn't about controlling those responses. It's about recognising them early enough to choose how you move next.</p>
+        <p>This chapter isn't here to help you process emotion. It's here to help you stay present with it.</p>
+      </div>
+
+      <div class="try-this-block">
+        <span class="try-this-tag">Try This</span>
+        <div class="try-this-title">Creating a Pause</div>
+        <p class="try-this-intro">Think of a recent moment when something caught you off guard. This exercise invites you to notice an emotional response early enough to create choice — presence, not control.</p>
+        <div class="step-block">
+          <div class="step-label">Describe the moment — what happened?</div>
+          <div class="step-desc">A comment, a request, a change in tone.</div>
+          <textarea class="response-area-dark" data-key="c13_try_a" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="step-block">
+          <div class="step-label">Name the emotion specifically</div>
+          <div class="step-desc">Not "bad" or "upset" — try: frustrated, unsettled, pressured, dismissed.</div>
+          <textarea class="response-area-dark" data-key="c13_try_b" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="step-block">
+          <div class="step-label">What grounded response was available — even if you didn't use it?</div>
+          <div class="step-desc">Not the perfect response. The steadier one.</div>
+          <textarea class="response-area-dark" data-key="c13_try_c" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+      </div>
+
+      <div class="reflection-block">
+        <div class="reflection-title">Reflection Prompts — Chapter Thirteen</div>
+        <div class="reflection-intro">These prompts help you recognise which emotions are most likely to take over your response, and what helps you regain steadiness.</div>
+
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 01</div>
+          <div class="prompt-question">Which emotions tend to hijack your response most quickly?</div>
+          <textarea class="response-area" data-key="c13_r1" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 02</div>
+          <div class="prompt-question">What helps you return to centre once you notice that shift?</div>
+          <textarea class="response-area" data-key="c13_r2" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 03</div>
+          <div class="prompt-question">What changes when you allow emotion without acting on it?</div>
+          <textarea class="response-area" data-key="c13_r3" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+      </div>
+
+      <div class="closing-nudge">
+        <div class="closing-nudge-label">Closing Nudge</div>
+        <p>You don't need to suppress emotion to lead yourself well.<br>You need space between feeling and responding.</p>
+      </div>
+      <!-- CHAPTER 14 -->
+      <div class="chapter-divider">
+        <div class="chapter-line"></div>
+        <div class="chapter-label">Chapter Fourteen</div>
+        <div class="chapter-line"></div>
+      </div>
+
+      <h2 class="chapter-title">Boundaries as Leadership</h2>
+      <p class="chapter-subtitle">Holding Your Line Quietly</p>
+
+      <div class="prose">
+        <p>Boundaries don't require force.</p>
+        <p><span class="line-break">They require clarity.</span></p>
+        <p>Most boundary strain comes not from conflict — but from the effort of managing expectations that were never questioned.</p>
+        <p>This chapter isn't about confrontation. It's about reducing the internal negotiation that drains your energy.</p>
+      </div>
+
+      <div class="try-this-block">
+        <span class="try-this-tag">Try This</span>
+        <div class="try-this-title">A Clean Boundary</div>
+        <p class="try-this-intro">Choose one situation where you tend to over-explain or delay. This exercise invites you to set a boundary before the internal negotiation begins — clarity, not confrontation.</p>
+        <div class="step-block">
+          <div class="step-label">Name the moment — what is being asked?</div>
+          <div class="step-desc">Be specific.</div>
+          <textarea class="response-area-dark" data-key="c14_try_a" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="step-block">
+          <div class="step-label">Decide your limit before responding</div>
+          <div class="step-desc">What is the boundary, stated in one sentence? No justification.</div>
+          <textarea class="response-area-dark" data-key="c14_try_b" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="step-block">
+          <div class="step-label">Notice the impact — on your body, on the moment</div>
+          <div class="step-desc">What did you observe?</div>
+          <textarea class="response-area-dark" data-key="c14_try_c" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+      </div>
+
+      <div class="reflection-block">
+        <div class="reflection-title">Reflection Prompts — Chapter Fourteen</div>
+        <div class="reflection-intro">These prompts help you notice where boundaries tend to soften and what makes holding them feel uncomfortable.</div>
+
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 01</div>
+          <div class="prompt-question">Where do your boundaries soften too quickly?</div>
+          <textarea class="response-area" data-key="c14_r1" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 02</div>
+          <div class="prompt-question">What emotion makes holding them feel uncomfortable?</div>
+          <textarea class="response-area" data-key="c14_r2" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 03</div>
+          <div class="prompt-question">What does this boundary protect?</div>
+          <textarea class="response-area" data-key="c14_r3" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+      </div>
+
+      <div class="closing-nudge">
+        <div class="closing-nudge-label">Closing Nudge</div>
+        <p>A calm boundary is a form of self-trust.</p>
+      </div>
+      <!-- CHAPTER 15 -->
+      <div class="chapter-divider">
+        <div class="chapter-line"></div>
+        <div class="chapter-label">Chapter Fifteen</div>
+        <div class="chapter-line"></div>
+      </div>
+
+      <h2 class="chapter-title">Presence and Impact</h2>
+      <p class="chapter-subtitle">Letting Calm Speak</p>
+
+      <div class="prose">
+        <p>Presence isn't something you perform.</p>
+        <p>It's what happens when you stop rushing your own response.</p>
+        <p>Impact doesn't come from effort. It comes from alignment — when what you think, feel, and do are pointing in the same direction.</p>
+        <p>This chapter is about noticing the moments where your calm already speaks — and trusting it more deliberately.</p>
+      </div>
+
+      <div class="try-this-block">
+        <span class="try-this-tag">Try This</span>
+        <div class="try-this-title">Grounded Presence</div>
+        <p class="try-this-intro">This exercise invites you to notice the moments where you're already present — and what made that possible. Recognition before practice.</p>
+        <div class="step-block">
+          <div class="step-label">Describe a recent moment when you felt genuinely present</div>
+          <div class="step-desc">Not performing, not managing — just there.</div>
+          <textarea class="response-area-dark" data-key="c15_try_a" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="step-block">
+          <div class="step-label">What made that possible? What conditions supported it?</div>
+          <div class="step-desc">State, environment, time of day — anything you notice.</div>
+          <textarea class="response-area-dark" data-key="c15_try_b" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="step-block">
+          <div class="step-label">What would it take to create those conditions more often?</div>
+          <div class="step-desc">One small thing is enough.</div>
+          <textarea class="response-area-dark" data-key="c15_try_c" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+      </div>
+
+      <div class="reflection-block">
+        <div class="reflection-title">Reflection Prompts — Chapter Fifteen</div>
+        <div class="reflection-intro">These prompts help you notice how your presence already lands — and where it could be trusted more.</div>
+
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 01</div>
+          <div class="prompt-question">When do others seem most receptive to you?</div>
+          <textarea class="response-area" data-key="c15_r1" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 02</div>
+          <div class="prompt-question">What happens to your presence when you're rushed or unheard?</div>
+          <textarea class="response-area" data-key="c15_r2" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 03</div>
+          <div class="prompt-question">What would change if you trusted your calm more deliberately?</div>
+          <textarea class="response-area" data-key="c15_r3" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+      </div>
+
+      <div class="closing-nudge">
+        <div class="closing-nudge-label">Closing Nudge</div>
+        <p>You don't need to speak louder.<br>You need to speak from steadier ground.</p>
+      </div>
+      <!-- STAGE 5 CLOSE -->
+      <div class="stage-close">
+        <div class="stage-close-label">Stage Five — Complete</div>
+        <h2>RISE — Integration</h2>
+        <div class="stage-close-prose">
+          <p style="margin-top:16px;">You've stopped performing steadiness.</p>
+          <p style="margin-top:16px;">You've started living it.</p>
+          <p style="margin-top:16px;">You've remained internally led under pressure. Held your line without drama. Let your presence do the work.</p>
+          <p style="margin-top:16px;">This isn't about becoming someone different.</p>
+          <p style="margin-top:16px;"><span class="highlight">It's about recognising who you've already become.</span></p>
+        </div>
+      </div>
+      <!-- STAGE 6 -->
+      <div class="stage-header">
+        <div class="stage-number">06</div>
+        <div class="stage-tag">Stage Six</div>
+        <h1 class="stage-title">RHYTHM</h1>
+        <p class="stage-subtitle">Living From Calm Continuity</p>
+      </div>
+
+      <div class="prose">
+        <p>Nothing new is being asked of you here.</p>
+        <p><span class="line-break">You're not beginning again.</span><span class="line-break">You're not consolidating lessons.</span></p>
+        <p>Rhythm isn't what keeps you steady at all times. It's what allows you to return when you're not.</p>
+        <p>This stage isn't about protecting progress. It's about trusting your ability to recalibrate — without drama, without judgement, without supervision.</p>
+        <p><span class="line-break">You don't need to stay centred.</span><span class="line-break">You need to know how to come back.</span></p>
+      </div>
+
+      <div class="reflection-block">
+        <div class="reflection-title">Reflection Prompts — Before You Begin</div>
+        <div class="reflection-intro">Take a breath. Let your shoulders drop. Notice where you are right now — not where you should be.</div>
+
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 01</div>
+          <div class="prompt-question">What helps you return to yourself most reliably?</div>
+          <textarea class="response-area" data-key="s6_r1" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 02</div>
+          <div class="prompt-question">What pulls you off-centre — not catastrophically, but gradually?</div>
+          <textarea class="response-area" data-key="s6_r2" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 03</div>
+          <div class="prompt-question">How do you usually know you're drifting?</div>
+          <textarea class="response-area" data-key="s6_r3" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 04</div>
+          <div class="prompt-question">What supports you in coming back?</div>
+          <textarea class="response-area" data-key="s6_r4" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+      </div>
+      <!-- CHAPTER 16 -->
+      <div class="chapter-divider">
+        <div class="chapter-line"></div>
+        <div class="chapter-label">Chapter Sixteen</div>
+        <div class="chapter-line"></div>
+      </div>
+
+      <h2 class="chapter-title">Rituals of Recalibration</h2>
+      <p class="chapter-subtitle">Small Returns That Matter</p>
+
+      <div class="prose">
+        <p>Rituals don't need meaning layered onto them.</p>
+        <p>They work because they're familiar. Because they anchor you back into your body. Because they happen without negotiation.</p>
+        <p>A recalibration ritual isn't a habit you track. It's a return point you recognise.</p>
+        <p>This chapter isn't about creating a routine. It's about identifying the small actions that help you come back to yourself — again and again.</p>
+      </div>
+
+      <div class="try-this-block">
+        <span class="try-this-tag">Try This</span>
+        <div class="try-this-title">Your Return Points</div>
+        <p class="try-this-intro">Rather than creating something new, you're identifying return points that already work — because they're familiar and require little effort.</p>
+        <div class="step-block">
+          <div class="step-label">List a few moments that already help you reset, even slightly</div>
+          <div class="step-desc">Physical, sensory, or relational — anything that works.</div>
+          <textarea class="response-area-dark" data-key="c16_try_a" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="step-block">
+          <div class="step-label">Choose one and describe it briefly</div>
+          <div class="step-desc">What it is. When it happens. What it restores.</div>
+          <textarea class="response-area-dark" data-key="c16_try_b" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="step-block">
+          <div class="step-label">Notice how little explanation it needs</div>
+          <div class="step-desc">That's the point. Write anything that surfaces.</div>
+          <textarea class="response-area-dark" data-key="c16_try_c" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+      </div>
+
+      <div class="reflection-block">
+        <div class="reflection-title">Reflection Prompts — Chapter Sixteen</div>
+        <div class="reflection-intro">These prompts help you explore why certain rituals feel grounding rather than draining.</div>
+
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 01</div>
+          <div class="prompt-question">Which rituals feel grounding rather than effortful?</div>
+          <textarea class="response-area" data-key="c16_r1" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 02</div>
+          <div class="prompt-question">What makes them easy to return to?</div>
+          <textarea class="response-area" data-key="c16_r2" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 03</div>
+          <div class="prompt-question">What happens when you trust these small anchors?</div>
+          <textarea class="response-area" data-key="c16_r3" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+      </div>
+
+      <div class="closing-nudge">
+        <div class="closing-nudge-label">Closing Nudge</div>
+        <p>You don't need many rituals.<br>You need ones you'll actually use.</p>
+      </div>
+      <!-- CHAPTER 17 -->
+      <div class="chapter-divider">
+        <div class="chapter-line"></div>
+        <div class="chapter-label">Chapter Seventeen</div>
+        <div class="chapter-line"></div>
+      </div>
+
+      <h2 class="chapter-title">Rest as Continuity</h2>
+      <p class="chapter-subtitle">Letting Recovery Be Ordinary</p>
+
+      <div class="prose">
+        <p>Rest doesn't have to repair you.</p>
+        <p>Often, it simply prevents depletion from becoming visible.</p>
+        <p>When rest is woven into your days — not saved for later — it stops feeling like something you have to earn.</p>
+        <p>This chapter isn't about rest as strategy. It's about rest as something that lives alongside effort, not after it.</p>
+      </div>
+
+      <div class="try-this-block">
+        <span class="try-this-tag">Try This</span>
+        <div class="try-this-title">Ordinary Rest</div>
+        <p class="try-this-intro">Rather than stopping or stepping away, you're softening slightly — allowing recovery to live alongside effort instead of waiting until depletion shows.</p>
+        <div class="step-block">
+          <div class="step-label">Choose one moment where you can soften, slightly</div>
+          <div class="step-desc">Not a break. Not time off. Just a release. What is it?</div>
+          <textarea class="response-area-dark" data-key="c17_try_a" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="step-block">
+          <div class="step-label">Do it once today — notice if anything shifts</div>
+          <div class="step-desc">Write what you observe, however small.</div>
+          <textarea class="response-area-dark" data-key="c17_try_b" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="step-block">
+          <div class="step-label">What did ordinary rest feel like?</div>
+          <div class="step-desc">Guilt? Relief? Nothing at all? Name it.</div>
+          <textarea class="response-area-dark" data-key="c17_try_c" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+      </div>
+
+      <div class="reflection-block">
+        <div class="reflection-title">Reflection Prompts — Chapter Seventeen</div>
+        <div class="reflection-intro">These prompts help you notice where rest is delayed or made conditional.</div>
+
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 01</div>
+          <div class="prompt-question">Where do you wait too long to rest?</div>
+          <textarea class="response-area" data-key="c17_r1" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 02</div>
+          <div class="prompt-question">What belief makes rest feel conditional?</div>
+          <textarea class="response-area" data-key="c17_r2" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 03</div>
+          <div class="prompt-question">What changes when recovery becomes ordinary?</div>
+          <textarea class="response-area" data-key="c17_r3" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+      </div>
+
+      <div class="closing-nudge">
+        <div class="closing-nudge-label">Closing Nudge</div>
+        <p>Rest doesn't interrupt your rhythm.<br>It's part of it.</p>
+      </div>
+      <!-- CHAPTER 18 -->
+      <div class="chapter-divider">
+        <div class="chapter-line"></div>
+        <div class="chapter-label">Chapter Eighteen</div>
+        <div class="chapter-line"></div>
+      </div>
+
+      <h2 class="chapter-title">Micro-Pauses & Grounding</h2>
+      <p class="chapter-subtitle">The Power of the Small Stop</p>
+
+      <div class="prose">
+        <p>You don't need more time to feel steady.</p>
+        <p>You need a way to return to yourself inside the moment you're already in.</p>
+        <p><span class="line-break">Micro-pauses are not breaks from life.</span>They are small points of contact — moments where you soften your pace just enough to stay present.</p>
+        <p>Nothing needs to stop. Nothing needs to be fixed.</p>
+      </div>
+
+      <div class="try-this-block">
+        <span class="try-this-tag">Try This</span>
+        <div class="try-this-title">A Micro-Pause</div>
+        <p class="try-this-intro">This exercise invites you to meet yourself inside the moment you're already in — a pause small enough to fit into real life as it's happening.</p>
+        <div class="step-block">
+          <div class="step-label">Where do you tend to move too quickly? What happens just before you rush?</div>
+          <div class="step-desc">Write whatever comes — even if incomplete.</div>
+          <textarea class="response-area-dark" data-key="c18_try_a" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="step-block">
+          <div class="step-label">Choose one moment in your day that happens often</div>
+          <div class="step-desc">Before replying, before deciding, before speaking, before moving on.</div>
+          <textarea class="response-area-dark" data-key="c18_try_b" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="step-block">
+          <div class="step-label">Choose one simple grounding action and try it once</div>
+          <div class="step-desc">One slower breath. Noticing your feet. Dropping your shoulders. What did you notice?</div>
+          <textarea class="response-area-dark" data-key="c18_try_c" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+      </div>
+
+      <div class="reflection-block">
+        <div class="reflection-title">Reflection Prompts — Chapter Eighteen</div>
+        <div class="reflection-intro">These prompts help you notice what changes when you pause, even briefly.</div>
+
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 01</div>
+          <div class="prompt-question">What changed when you paused — even briefly?</div>
+          <textarea class="response-area" data-key="c18_r1" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 02</div>
+          <div class="prompt-question">Did anything feel clearer, steadier, or less effortful?</div>
+          <textarea class="response-area" data-key="c18_r2" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="prompt-item">
+          <div class="prompt-number">Prompt 03</div>
+          <div class="prompt-question">What does your body need more of: speed, or space?</div>
+          <textarea class="response-area" data-key="c18_r3" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+      </div>
+
+      <div class="closing-nudge">
+        <div class="closing-nudge-label">Closing Nudge</div>
+        <p>A small pause can change everything.</p>
+      </div>
+      <!-- STAGE 6 CLOSE -->
+      <div class="stage-close">
+        <div class="stage-close-label">Stage Six — Complete</div>
+        <h2>RHYTHM — Integration</h2>
+        <div class="stage-close-prose">
+          <p>You've learned how to notice.</p>
+          <p style="margin-top:16px;">How to filter. How to choose. How to move with less resistance. How to stay steady under pressure.</p>
+          <p style="margin-top:16px;">Not as techniques. As lived responses.</p>
+          <p style="margin-top:16px;">You won't do this perfectly. You don't need to.</p>
+          <p style="margin-top:24px;"><span class="highlight">What matters is that you now recognise when you've drifted — and know how to return.</span></p>
+          <p style="margin-top:24px;">That's rhythm.</p>
+        </div>
+      </div>
+      <!-- FINAL CHAPTER -->
+      <div class="chapter-divider">
+        <div class="chapter-line"></div>
+        <div class="chapter-label">Final Chapter</div>
+        <div class="chapter-line"></div>
+      </div>
+
+      <h2 class="chapter-title">Quiet Authority</h2>
+      <p class="chapter-subtitle" style="margin-bottom:32px;">You don't need to announce this stage.</p>
+
+      <div class="prose">
+        <p>There's no moment where you suddenly feel "ready" or visibly different. What changes is subtler than that.</p>
+        <p><span class="line-break">You stop bracing.</span><span class="line-break">You stop rehearsing.</span><span class="line-break">You stop explaining yourself internally.</span></p>
+        <p>Quiet authority isn't about confidence as performance. It's about alignment — when what you think, feel, and do no longer pull in different directions.</p>
+        <p>This isn't something you switch on. It's something you notice <em>after</em> it's already begun.</p>
+      </div>
+
+      <div class="try-this-block">
+        <span class="try-this-tag">Final Reflection</span>
+        <div class="try-this-title">Quiet Authority</div>
+        <p class="try-this-intro">Without analysing or correcting anything, reflect on the following. You don't need to answer every question. Let your attention rest where it naturally lands.</p>
+
+        <div class="step-block">
+          <div class="step-label">Where do I feel less reactive than I once did?</div>
+          <textarea class="response-area-dark" data-key="final_a" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="step-block">
+          <div class="step-label">What no longer requires the same effort to hold together?</div>
+          <textarea class="response-area-dark" data-key="final_b" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="step-block">
+          <div class="step-label">Where have I stopped asking for permission — even quietly?</div>
+          <textarea class="response-area-dark" data-key="final_c" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+        <div class="step-block">
+          <div class="step-label">What feels simpler now — not because life is easier, but because I am steadier?</div>
+          <textarea class="response-area-dark" data-key="final_d" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+      </div>
+
+      <div class="stage-close" style="margin-top:48px;">
+        <div class="stage-close-label">Strong. Still. Quietly Tough.</div>
+        <h2>You're not finished.<br>You're returning.</h2>
+        <div class="stage-close-prose">
+          <p>This workbook doesn't end because something is finished.</p>
+          <p style="margin-top:16px;">It ends because you now know how to return to yourself — again and again — without force.</p>
+          <p style="margin-top:16px;">You may move back through these stages. You may linger in one and skip another. You may not notice change until long after it's happened.</p>
+          <p style="margin-top:24px;"><span class="highlight">That's not a failure of progress. That's how quiet strength works.</span></p>
+          <p style="margin-top:24px;"><em>quietlytough.com</em></p>
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- TRY THIS TAB -->
+    <div id="section-trythis" style="display:none;">
+      <div class="journal-view">
+        <div class="journal-header">
+          <h2>Try This</h2>
+          <p>All 19 exercises gathered in one place — each with a brief note on what it's for. Your responses here are the same as those in the Guide.</p>
+        </div>
+
+        <!-- Stage 1 -->
+        <div class="tab-stage-label">Stage 1 — Fog</div>
+
+        <div class="tab-exercise-card">
+          <div class="tab-exercise-meta">Chapter 1 · Rewrite the Inherited Story</div>
+          <div class="tab-exercise-context">Notice which beliefs about this stage of life you've been carrying — and whether they still deserve your belief.</div>
+          <div class="tab-exercise-step">Version A — The Inherited Script</div>
+          <div class="tab-exercise-desc">Write the messages you absorbed about midlife. Phrases. Assumptions. Expectations. Don't edit.</div>
+          <textarea class="response-area" data-key="c1_try_a" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+          <div class="tab-exercise-step" style="margin-top:16px;">Version B — Your Lived Truth</div>
+          <div class="tab-exercise-desc">Now write what this stage actually feels like from the inside. What's changed? What feels unfinished or newly possible?</div>
+          <textarea class="response-area" data-key="c1_try_b" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+
+        <div class="tab-exercise-card">
+          <div class="tab-exercise-meta">Chapter 2 · Micro-Stretch Mapping</div>
+          <div class="tab-exercise-context">Notice where routine has replaced choice, and where comfort has quietly become confinement.</div>
+          <div class="tab-exercise-step">Autopilot Routines — What Keeps Them in Place — A 5% Shift</div>
+          <div class="table-exercise" style="margin-top:12px;">
+            <table class="exercise-table">
+              <thead><tr><th>Autopilot Routine</th><th>What Keeps It in Place</th><th>A 5% Shift</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><textarea class="table-cell-input" data-key="c2_t1a" placeholder="" oninput="saveResponse(this)"></textarea></td>
+                  <td><textarea class="table-cell-input" data-key="c2_t1b" placeholder="" oninput="saveResponse(this)"></textarea></td>
+                  <td><textarea class="table-cell-input" data-key="c2_t1c" placeholder="" oninput="saveResponse(this)"></textarea></td>
+                </tr>
+                <tr>
+                  <td><textarea class="table-cell-input" data-key="c2_t2a" placeholder="" oninput="saveResponse(this)"></textarea></td>
+                  <td><textarea class="table-cell-input" data-key="c2_t2b" placeholder="" oninput="saveResponse(this)"></textarea></td>
+                  <td><textarea class="table-cell-input" data-key="c2_t2c" placeholder="" oninput="saveResponse(this)"></textarea></td>
+                </tr>
+                <tr>
+                  <td><textarea class="table-cell-input" data-key="c2_t3a" placeholder="" oninput="saveResponse(this)"></textarea></td>
+                  <td><textarea class="table-cell-input" data-key="c2_t3b" placeholder="" oninput="saveResponse(this)"></textarea></td>
+                  <td><textarea class="table-cell-input" data-key="c2_t3c" placeholder="" oninput="saveResponse(this)"></textarea></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="tab-exercise-card">
+          <div class="tab-exercise-meta">Chapter 3 · A Simple Dialogue</div>
+          <div class="tab-exercise-context">Meet your inner voice — notice what it's been trying to manage on your behalf.</div>
+          <div class="tab-exercise-step">"What are you trying to protect me from?"</div>
+          <textarea class="response-area" data-key="c3_try_a" placeholder="Let the response come without editing…" oninput="saveResponse(this)"></textarea>
+          <div class="tab-exercise-step" style="margin-top:16px;">What does this voice need to hear from you now?</div>
+          <textarea class="response-area" data-key="c3_try_b" placeholder="Write back — briefly." oninput="saveResponse(this)"></textarea>
+          <div class="tab-exercise-step" style="margin-top:16px;">What do you notice shifts?</div>
+          <textarea class="response-area" data-key="c3_try_c" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+
+        <!-- Stage 2 -->
+        <div class="tab-stage-label">Stage 2 — Filter</div>
+
+        <div class="tab-exercise-card">
+          <div class="tab-exercise-meta">Chapter 4 · A Simple Attention Reset</div>
+          <div class="tab-exercise-context">Notice where your attention drifts — building awareness of your own mental habits, not changing them yet.</div>
+          <div class="tab-exercise-step">Right now, what is your mind doing?</div>
+          <textarea class="response-area" data-key="c4_try_a" placeholder="Replaying something? Planning? Worrying?" oninput="saveResponse(this)"></textarea>
+          <div class="tab-exercise-step" style="margin-top:16px;">Where does it go most often when left unattended?</div>
+          <textarea class="response-area" data-key="c4_try_b" placeholder="Name the pattern, not the content." oninput="saveResponse(this)"></textarea>
+          <div class="tab-exercise-step" style="margin-top:16px;">What would change if you redirected it, gently, just once today?</div>
+          <textarea class="response-area" data-key="c4_try_c" placeholder="One small act of deliberate attention." oninput="saveResponse(this)"></textarea>
+        </div>
+
+        <div class="tab-exercise-card">
+          <div class="tab-exercise-meta">Chapter 5 · The Gentle No</div>
+          <div class="tab-exercise-context">One low-stakes situation where you usually over-extend — observe, then respond simply.</div>
+          <div class="tab-exercise-step">What is being asked of you?</div>
+          <textarea class="response-area" data-key="c5_try_a" placeholder="Be specific and factual." oninput="saveResponse(this)"></textarea>
+          <div class="tab-exercise-step" style="margin-top:16px;">Respond simply — one sentence, no explanation</div>
+          <textarea class="response-area" data-key="c5_try_b" placeholder="e.g. That won't work for me." oninput="saveResponse(this)"></textarea>
+          <div class="tab-exercise-step" style="margin-top:16px;">What happened — in your body, in the situation?</div>
+          <textarea class="response-area" data-key="c5_try_c" placeholder="Even a small observation counts." oninput="saveResponse(this)"></textarea>
+        </div>
+
+        <div class="tab-exercise-card">
+          <div class="tab-exercise-meta">Chapter 6 · Five Minutes of Space</div>
+          <div class="tab-exercise-context">Clear one small area — physical, digital, or mental. Notice what changes when something is simply gone.</div>
+          <div class="tab-exercise-step">Remove one thing</div>
+          <textarea class="response-area" data-key="c6_try_a" placeholder="An object. A notification. A thought." oninput="saveResponse(this)"></textarea>
+          <div class="tab-exercise-step" style="margin-top:16px;">Sit with the space — notice your body's response</div>
+          <textarea class="response-area" data-key="c6_try_b" placeholder="What do you feel?" oninput="saveResponse(this)"></textarea>
+          <div class="tab-exercise-step" style="margin-top:16px;">Capture what shifted — one line</div>
+          <textarea class="response-area" data-key="c6_try_c" placeholder="Just an observation." oninput="saveResponse(this)"></textarea>
+        </div>
+
+        <!-- Stage 3 -->
+        <div class="tab-stage-label">Stage 3 — Focus</div>
+
+        <div class="tab-exercise-card">
+          <div class="tab-exercise-meta">Chapter 7 · Finding What's Already There</div>
+          <div class="tab-exercise-context">Notice your values as they already show up — not as aspirations, but as patterns in how you actually live.</div>
+          <div class="tab-exercise-step">A recent decision you felt quietly good about — what value is underneath it?</div>
+          <textarea class="response-area" data-key="c7_try_a" placeholder="Name the decision, then name the value." oninput="saveResponse(this)"></textarea>
+          <div class="tab-exercise-step" style="margin-top:16px;">Something you repeatedly protect or make room for — what value does that reflect?</div>
+          <textarea class="response-area" data-key="c7_try_b" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+          <div class="tab-exercise-step" style="margin-top:16px;">Where does life feel most misaligned — what value is being crowded out?</div>
+          <textarea class="response-area" data-key="c7_try_c" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+
+        <div class="tab-exercise-card">
+          <div class="tab-exercise-meta">Chapter 8 · The Alignment Check</div>
+          <div class="tab-exercise-context">One goal that's been circling — does it still fit who you are now?</div>
+          <div class="tab-exercise-step">Name the goal or direction</div>
+          <textarea class="response-area" data-key="c8_try_a" placeholder="Write it plainly." oninput="saveResponse(this)"></textarea>
+          <div class="tab-exercise-step" style="margin-top:16px;">Does this energise or drain? Is it for who I am now — or who I used to be?</div>
+          <textarea class="response-area" data-key="c8_try_b" placeholder="Trust your first response." oninput="saveResponse(this)"></textarea>
+          <div class="tab-exercise-step" style="margin-top:16px;">Would I pursue this if no one expected anything of me?</div>
+          <textarea class="response-area" data-key="c8_try_c" placeholder="Yes or no — and what does that tell you?" oninput="saveResponse(this)"></textarea>
+        </div>
+
+        <div class="tab-exercise-card">
+          <div class="tab-exercise-meta">Chapter 9 · Listening to the Signal</div>
+          <div class="tab-exercise-context">Listen to self-doubt as a signal — not a warning to stop, but information about what matters.</div>
+          <div class="tab-exercise-step">The doubt says…</div>
+          <textarea class="response-area" data-key="c9_try_a" placeholder="Write the actual words." oninput="saveResponse(this)"></textarea>
+          <div class="tab-exercise-step" style="margin-top:16px;">It might be trying to protect me from…</div>
+          <textarea class="response-area" data-key="c9_try_b" placeholder="Let the answer come without analysis." oninput="saveResponse(this)"></textarea>
+          <div class="tab-exercise-step" style="margin-top:16px;">What I actually need right now is…</div>
+          <textarea class="response-area" data-key="c9_try_c" placeholder="Reassurance, preparation, rest, clarity, support — name one." oninput="saveResponse(this)"></textarea>
+        </div>
+
+        <!-- Stage 4 -->
+        <div class="tab-stage-label">Stage 4 — Flow</div>
+
+        <div class="tab-exercise-card">
+          <div class="tab-exercise-meta">Chapter 10 · A Gentle Energy Check</div>
+          <div class="tab-exercise-context">Look at a typical day through the lens of energy — where it expands, stays neutral, or quietly drains.</div>
+          <div class="table-exercise" style="margin-top:12px;">
+            <table class="exercise-table">
+              <thead><tr><th>Time of day &amp; what you do</th><th>Expands / Neutral / Drains</th><th>One small adjustment</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><textarea class="table-cell-input" data-key="c10_t1a" placeholder="Morning" oninput="saveResponse(this)"></textarea></td>
+                  <td><textarea class="table-cell-input" data-key="c10_t1b" oninput="saveResponse(this)"></textarea></td>
+                  <td><textarea class="table-cell-input" data-key="c10_t1c" oninput="saveResponse(this)"></textarea></td>
+                </tr>
+                <tr>
+                  <td><textarea class="table-cell-input" data-key="c10_t2a" placeholder="Midday" oninput="saveResponse(this)"></textarea></td>
+                  <td><textarea class="table-cell-input" data-key="c10_t2b" oninput="saveResponse(this)"></textarea></td>
+                  <td><textarea class="table-cell-input" data-key="c10_t2c" oninput="saveResponse(this)"></textarea></td>
+                </tr>
+                <tr>
+                  <td><textarea class="table-cell-input" data-key="c10_t3a" placeholder="Evening" oninput="saveResponse(this)"></textarea></td>
+                  <td><textarea class="table-cell-input" data-key="c10_t3b" oninput="saveResponse(this)"></textarea></td>
+                  <td><textarea class="table-cell-input" data-key="c10_t3c" oninput="saveResponse(this)"></textarea></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="tab-exercise-card">
+          <div class="tab-exercise-meta">Chapter 11 · A Short Reset</div>
+          <div class="tab-exercise-context">Find one moment where your energy dips — introduce a small pause before strain sets in.</div>
+          <div class="tab-exercise-step">Name the moment where your energy dips</div>
+          <textarea class="response-area" data-key="c11_try_a" placeholder="When does it happen?" oninput="saveResponse(this)"></textarea>
+          <div class="tab-exercise-step" style="margin-top:16px;">Pause — release one place you hold tension. What do you notice?</div>
+          <textarea class="response-area" data-key="c11_try_b" placeholder="Jaw. Shoulders. Hands." oninput="saveResponse(this)"></textarea>
+          <div class="tab-exercise-step" style="margin-top:16px;">Continue — notice if anything feels different</div>
+          <textarea class="response-area" data-key="c11_try_c" placeholder="Even a small shift counts." oninput="saveResponse(this)"></textarea>
+        </div>
+
+        <div class="tab-exercise-card">
+          <div class="tab-exercise-meta">Chapter 12 · One Small Loop</div>
+          <div class="tab-exercise-context">Choose one tiny action, link it to something you already do, repeat for one week.</div>
+          <div class="table-exercise" style="margin-top:12px;">
+            <table class="exercise-table">
+              <thead><tr><th>One action (under 2 minutes)</th><th>Something to link it to</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><textarea class="table-cell-input" data-key="c12_t1a" oninput="saveResponse(this)"></textarea></td>
+                  <td><textarea class="table-cell-input" data-key="c12_t1b" oninput="saveResponse(this)"></textarea></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tab-exercise-step" style="margin-top:16px;">Insights after one week</div>
+          <textarea class="response-area" data-key="c12_insights" placeholder="What did you notice?" oninput="saveResponse(this)"></textarea>
+        </div>
+
+        <!-- Stage 5 -->
+        <div class="tab-stage-label">Stage 5 — Rise</div>
+
+        <div class="tab-exercise-card">
+          <div class="tab-exercise-meta">Chapter 13 · Creating a Pause</div>
+          <div class="tab-exercise-context">Notice an emotional response early enough to create choice — presence, not control.</div>
+          <div class="tab-exercise-step">Describe the moment — what happened?</div>
+          <textarea class="response-area" data-key="c13_try_a" placeholder="A comment, a request, a change in tone." oninput="saveResponse(this)"></textarea>
+          <div class="tab-exercise-step" style="margin-top:16px;">Name the emotion specifically</div>
+          <textarea class="response-area" data-key="c13_try_b" placeholder="Frustrated, unsettled, pressured, dismissed…" oninput="saveResponse(this)"></textarea>
+          <div class="tab-exercise-step" style="margin-top:16px;">What grounded response was available?</div>
+          <textarea class="response-area" data-key="c13_try_c" placeholder="Not the perfect one — the steadier one." oninput="saveResponse(this)"></textarea>
+        </div>
+
+        <div class="tab-exercise-card">
+          <div class="tab-exercise-meta">Chapter 14 · A Clean Boundary</div>
+          <div class="tab-exercise-context">Set a boundary before the internal negotiation begins — clarity, not confrontation.</div>
+          <div class="tab-exercise-step">Name the moment — what is being asked?</div>
+          <textarea class="response-area" data-key="c14_try_a" placeholder="Be specific." oninput="saveResponse(this)"></textarea>
+          <div class="tab-exercise-step" style="margin-top:16px;">Decide your limit — one sentence, no justification</div>
+          <textarea class="response-area" data-key="c14_try_b" placeholder="e.g. That won't work for me." oninput="saveResponse(this)"></textarea>
+          <div class="tab-exercise-step" style="margin-top:16px;">Notice the impact — on your body, on the moment</div>
+          <textarea class="response-area" data-key="c14_try_c" placeholder="What did you observe?" oninput="saveResponse(this)"></textarea>
+        </div>
+
+        <div class="tab-exercise-card">
+          <div class="tab-exercise-meta">Chapter 15 · Grounded Presence</div>
+          <div class="tab-exercise-context">Notice the moments where you're already present — recognition before practice.</div>
+          <div class="tab-exercise-step">A recent moment when you felt genuinely present</div>
+          <textarea class="response-area" data-key="c15_try_a" placeholder="Not performing, not managing — just there." oninput="saveResponse(this)"></textarea>
+          <div class="tab-exercise-step" style="margin-top:16px;">What made that possible? What conditions supported it?</div>
+          <textarea class="response-area" data-key="c15_try_b" placeholder="State, environment, time of day…" oninput="saveResponse(this)"></textarea>
+          <div class="tab-exercise-step" style="margin-top:16px;">What would it take to create those conditions more often?</div>
+          <textarea class="response-area" data-key="c15_try_c" placeholder="One small thing is enough." oninput="saveResponse(this)"></textarea>
+        </div>
+
+        <!-- Stage 6 -->
+        <div class="tab-stage-label">Stage 6 — Rhythm</div>
+
+        <div class="tab-exercise-card">
+          <div class="tab-exercise-meta">Chapter 16 · Your Return Points</div>
+          <div class="tab-exercise-context">Identify the small actions that already help you come back to yourself — recognition, not design.</div>
+          <div class="tab-exercise-step">List a few moments that already help you reset, even slightly</div>
+          <textarea class="response-area" data-key="c16_try_a" placeholder="Physical, sensory, or relational." oninput="saveResponse(this)"></textarea>
+          <div class="tab-exercise-step" style="margin-top:16px;">Choose one and describe it briefly — what it is, when it happens, what it restores</div>
+          <textarea class="response-area" data-key="c16_try_b" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+          <div class="tab-exercise-step" style="margin-top:16px;">Notice how little explanation it needs</div>
+          <textarea class="response-area" data-key="c16_try_c" placeholder="That's the point." oninput="saveResponse(this)"></textarea>
+        </div>
+
+        <div class="tab-exercise-card">
+          <div class="tab-exercise-meta">Chapter 17 · Ordinary Rest</div>
+          <div class="tab-exercise-context">Allow recovery to live alongside effort — not after it, not earned, just woven in.</div>
+          <div class="tab-exercise-step">Choose one moment where you can soften, slightly</div>
+          <textarea class="response-area" data-key="c17_try_a" placeholder="Not a break. Just a release." oninput="saveResponse(this)"></textarea>
+          <div class="tab-exercise-step" style="margin-top:16px;">Do it once today — notice if anything shifts</div>
+          <textarea class="response-area" data-key="c17_try_b" placeholder="Write what you observe, however small." oninput="saveResponse(this)"></textarea>
+          <div class="tab-exercise-step" style="margin-top:16px;">What did ordinary rest feel like?</div>
+          <textarea class="response-area" data-key="c17_try_c" placeholder="Guilt? Relief? Nothing at all? Name it." oninput="saveResponse(this)"></textarea>
+        </div>
+
+        <div class="tab-exercise-card">
+          <div class="tab-exercise-meta">Chapter 18 · A Micro-Pause</div>
+          <div class="tab-exercise-context">Meet yourself inside the moment you're already in — a pause small enough to fit real life.</div>
+          <div class="tab-exercise-step">Where do you tend to move too quickly? What happens just before you rush?</div>
+          <textarea class="response-area" data-key="c18_try_a" placeholder="Write whatever comes." oninput="saveResponse(this)"></textarea>
+          <div class="tab-exercise-step" style="margin-top:16px;">Choose one moment in your day that happens often</div>
+          <textarea class="response-area" data-key="c18_try_b" placeholder="Before replying, before deciding, before moving on…" oninput="saveResponse(this)"></textarea>
+          <div class="tab-exercise-step" style="margin-top:16px;">Choose one grounding action and try it once — what did you notice?</div>
+          <textarea class="response-area" data-key="c18_try_c" placeholder="One slower breath. Dropping your shoulders. Noticing your feet." oninput="saveResponse(this)"></textarea>
+        </div>
+
+        <!-- Final -->
+        <div class="tab-stage-label">Final Chapter — Quiet Authority</div>
+        <div class="tab-exercise-card">
+          <div class="tab-exercise-meta">Final Reflection</div>
+          <div class="tab-exercise-context">Without analysing or correcting anything — let your attention rest where it naturally lands.</div>
+          <div class="tab-exercise-step">Where do I feel less reactive than I once did?</div>
+          <textarea class="response-area" data-key="final_a" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+          <div class="tab-exercise-step" style="margin-top:16px;">What no longer requires the same effort to hold together?</div>
+          <textarea class="response-area" data-key="final_b" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+          <div class="tab-exercise-step" style="margin-top:16px;">Where have I stopped asking for permission — even quietly?</div>
+          <textarea class="response-area" data-key="final_c" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+          <div class="tab-exercise-step" style="margin-top:16px;">What feels simpler now — not because life is easier, but because I am steadier?</div>
+          <textarea class="response-area" data-key="final_d" placeholder="Write here…" oninput="saveResponse(this)"></textarea>
+        </div>
+
+        <div style="border-top:1px solid var(--stone);margin-top:48px;padding-top:32px;text-align:center;">
+          <button class="export-btn" onclick="exportAll()">Export All Responses</button>
+        </div>
+      </div>
+    </div>
+    <!-- REFLECTIONS TAB -->
+    <div id="section-reflections" style="display:none;">
+      <div class="journal-view">
+        <div class="journal-header">
+          <h2>Reflections</h2>
+          <p>All reflection prompts across every stage and chapter — each with a brief note on what you're exploring. Your responses here are the same as those in the Guide.</p>
+        </div>
+
+        <div class="tab-stage-label">Stage 1 — Fog · Before You Begin</div>
+        <div class="tab-exercise-card">
+          <div class="tab-exercise-context">Before you begin Stage 1 — a moment to settle and notice what's already present.</div>
+          <div class="prompt-item"><div class="prompt-number">01</div><div class="prompt-question">Where does something in your life feel slightly off — even if you can't explain why yet?</div><textarea class="response-area" data-key="s1_r1" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+          <div class="prompt-item"><div class="prompt-number">02</div><div class="prompt-question">Where are you continuing out of habit rather than desire?</div><textarea class="response-area" data-key="s1_r2" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+          <div class="prompt-item"><div class="prompt-number">03</div><div class="prompt-question">Where does "fine" feel thinner than it used to?</div><textarea class="response-area" data-key="s1_r3" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+          <div class="prompt-item"><div class="prompt-number">04</div><div class="prompt-question">What part of you has been asking for your attention — quietly, and repeatedly?</div><textarea class="response-area" data-key="s1_r4" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+          <div class="prompt-item"><div class="prompt-number">05</div><div class="prompt-question">What have you been avoiding naming?</div><textarea class="response-area" data-key="s1_r5" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+        </div>
+
+        <div class="tab-exercise-card">
+          <div class="tab-exercise-meta">Chapter 1 · The Myth of Midlife Decline</div>
+          <div class="tab-exercise-context">Which ideas about this stage of life have you been carrying — and do they still deserve your belief?</div>
+          <div class="prompt-item"><div class="prompt-number">01</div><div class="prompt-question">What beliefs about this stage of life feel heavy or limiting?</div><textarea class="response-area" data-key="c1_r1" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+          <div class="prompt-item"><div class="prompt-number">02</div><div class="prompt-question">What possibility feels quietly interesting — even if you'd normally dismiss it?</div><textarea class="response-area" data-key="c1_r2" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+          <div class="prompt-item"><div class="prompt-number">03</div><div class="prompt-question">What changes when you stop treating this "middle" as an ending?</div><textarea class="response-area" data-key="c1_r3" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+        </div>
+
+        <div class="tab-exercise-card">
+          <div class="tab-exercise-meta">Chapter 2 · The Comfort Zone Trap</div>
+          <div class="tab-exercise-context">Noticing patterns that keep things running smoothly — staying with what you observed, rather than what you think about it.</div>
+          <div class="prompt-item"><div class="prompt-number">01</div><div class="prompt-question">Where does repetition feel dull rather than grounding?</div><textarea class="response-area" data-key="c2_r1" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+          <div class="prompt-item"><div class="prompt-number">02</div><div class="prompt-question">What responsibility are you carrying simply because you always have?</div><textarea class="response-area" data-key="c2_r2" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+          <div class="prompt-item"><div class="prompt-number">03</div><div class="prompt-question">What small risk feels quietly relieving to imagine?</div><textarea class="response-area" data-key="c2_r3" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+        </div>
+
+        <div class="tab-exercise-card">
+          <div class="tab-exercise-meta">Chapter 3 · Meeting Your Inner Voice</div>
+          <div class="tab-exercise-context">Gentle recognition of what surfaced — no need to make meaning yet.</div>
+          <div class="prompt-item"><div class="prompt-number">01</div><div class="prompt-question">When does your inner voice speak the loudest?</div><textarea class="response-area" data-key="c3_r1" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+          <div class="prompt-item"><div class="prompt-number">02</div><div class="prompt-question">What tone does it usually use?</div><textarea class="response-area" data-key="c3_r2" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+          <div class="prompt-item"><div class="prompt-number">03</div><div class="prompt-question">What does it seem most concerned about losing?</div><textarea class="response-area" data-key="c3_r3" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+        </div>
+
+        <div class="tab-stage-label">Stage 2 — Filter · Before You Begin</div>
+        <div class="tab-exercise-card">
+          <div class="tab-exercise-context">Before Stage 2 — notice what's competing for your attention before you begin filtering it.</div>
+          <div class="prompt-item"><div class="prompt-number">01</div><div class="prompt-question">What currently takes up more mental space than it deserves?</div><textarea class="response-area" data-key="s2_r1" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+          <div class="prompt-item"><div class="prompt-number">02</div><div class="prompt-question">Which expectations feel inherited rather than chosen?</div><textarea class="response-area" data-key="s2_r2" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+          <div class="prompt-item"><div class="prompt-number">03</div><div class="prompt-question">Where do you feel mentally crowded or overstimulated?</div><textarea class="response-area" data-key="s2_r3" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+          <div class="prompt-item"><div class="prompt-number">04</div><div class="prompt-question">What happens in your body when you imagine a little less input?</div><textarea class="response-area" data-key="s2_r4" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+        </div>
+
+        <div class="tab-exercise-card">
+          <div class="tab-exercise-meta">Chapter 4 · Mindfulness Isn't a Buzzword</div>
+          <div class="tab-exercise-context">Exploring your relationship with attention — where it lands, what pulls it away.</div>
+          <div class="prompt-item"><div class="prompt-number">01</div><div class="prompt-question">Where does your attention feel most scattered?</div><textarea class="response-area" data-key="c4_r1" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+          <div class="prompt-item"><div class="prompt-number">02</div><div class="prompt-question">What pulls you out of the present moment most reliably?</div><textarea class="response-area" data-key="c4_r2" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+          <div class="prompt-item"><div class="prompt-number">03</div><div class="prompt-question">What changes when you notice where your mind has gone, without judging it?</div><textarea class="response-area" data-key="c4_r3" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+        </div>
+
+        <div class="tab-exercise-card">
+          <div class="tab-exercise-meta">Chapter 5 · The Quiet "No"</div>
+          <div class="tab-exercise-context">Noticing where obligation lives — factual, not performance-based.</div>
+          <div class="prompt-item"><div class="prompt-number">01</div><div class="prompt-question">Where does saying yes feel automatic rather than intentional?</div><textarea class="response-area" data-key="c5_r1" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+          <div class="prompt-item"><div class="prompt-number">02</div><div class="prompt-question">What emotion comes up when you imagine not responding immediately?</div><textarea class="response-area" data-key="c5_r2" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+          <div class="prompt-item"><div class="prompt-number">03</div><div class="prompt-question">What did this small boundary protect?</div><textarea class="response-area" data-key="c5_r3" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+        </div>
+
+        <div class="tab-exercise-card">
+          <div class="tab-exercise-meta">Chapter 6 · Creating White Space</div>
+          <div class="tab-exercise-context">Noticing the effect of creating space — not evaluating the choice.</div>
+          <div class="prompt-item"><div class="prompt-number">01</div><div class="prompt-question">Which kind of noise drains you fastest?</div><textarea class="response-area" data-key="c6_r1" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+          <div class="prompt-item"><div class="prompt-number">02</div><div class="prompt-question">Where do you crave more breathing room?</div><textarea class="response-area" data-key="c6_r2" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+          <div class="prompt-item"><div class="prompt-number">03</div><div class="prompt-question">What does clarity feel like in your body?</div><textarea class="response-area" data-key="c6_r3" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+        </div>
+
+        <div class="tab-stage-label">Stage 3 — Focus · Before You Begin</div>
+        <div class="tab-exercise-card">
+          <div class="tab-exercise-context">Before Stage 3 — noticing where energy feels steady, and where it scatters.</div>
+          <div class="prompt-item"><div class="prompt-number">01</div><div class="prompt-question">What activities or moments reliably bring you back to yourself?</div><textarea class="response-area" data-key="s3_r1" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+          <div class="prompt-item"><div class="prompt-number">02</div><div class="prompt-question">Where does your energy drain without giving much in return?</div><textarea class="response-area" data-key="s3_r2" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+          <div class="prompt-item"><div class="prompt-number">03</div><div class="prompt-question">What feels aligned in your life right now — even quietly?</div><textarea class="response-area" data-key="s3_r3" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+          <div class="prompt-item"><div class="prompt-number">04</div><div class="prompt-question">What feels inherited rather than chosen?</div><textarea class="response-area" data-key="s3_r4" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+        </div>
+
+        <div class="tab-exercise-card">
+          <div class="tab-exercise-meta">Chapter 7 · Core Values</div>
+          <div class="tab-exercise-context">Bringing values into clearer view — answering only what feels accessible.</div>
+          <div class="prompt-item"><div class="prompt-number">01</div><div class="prompt-question">Which of your values feels most neglected right now?</div><textarea class="response-area" data-key="c7_r1" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+          <div class="prompt-item"><div class="prompt-number">02</div><div class="prompt-question">Where are you living most closely in line with what matters to you?</div><textarea class="response-area" data-key="c7_r2" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+          <div class="prompt-item"><div class="prompt-number">03</div><div class="prompt-question">What would change if one neglected value received more of your attention?</div><textarea class="response-area" data-key="c7_r3" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+        </div>
+
+        <div class="tab-exercise-card">
+          <div class="tab-exercise-meta">Chapter 8 · Intentional Goals</div>
+          <div class="tab-exercise-context">Paying attention to lightness, resistance, and quiet reluctance — signals that often get overridden.</div>
+          <div class="prompt-item"><div class="prompt-number">01</div><div class="prompt-question">What goals no longer reflect who you are?</div><textarea class="response-area" data-key="c8_r1" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+          <div class="prompt-item"><div class="prompt-number">02</div><div class="prompt-question">What direction feels lighter — even if it's less impressive?</div><textarea class="response-area" data-key="c8_r2" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+          <div class="prompt-item"><div class="prompt-number">03</div><div class="prompt-question">What would change if you allowed yourself to want less, but want it more honestly?</div><textarea class="response-area" data-key="c8_r3" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+        </div>
+
+        <div class="tab-exercise-card">
+          <div class="tab-exercise-meta">Chapter 9 · Reframing Self-Doubt</div>
+          <div class="tab-exercise-context">Exploring when doubt surfaces and what it seems to be protecting.</div>
+          <div class="prompt-item"><div class="prompt-number">01</div><div class="prompt-question">When does self-doubt tend to appear most strongly for you?</div><textarea class="response-area" data-key="c9_r1" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+          <div class="prompt-item"><div class="prompt-number">02</div><div class="prompt-question">What does it seem most concerned about?</div><textarea class="response-area" data-key="c9_r2" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+          <div class="prompt-item"><div class="prompt-number">03</div><div class="prompt-question">What changes when you treat doubt as information rather than instruction?</div><textarea class="response-area" data-key="c9_r3" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+        </div>
+
+        <div class="tab-stage-label">Stage 4 — Flow · Before You Begin</div>
+        <div class="tab-exercise-card">
+          <div class="tab-exercise-context">Before Stage 4 — noticing your internal speed, not your schedule.</div>
+          <div class="prompt-item"><div class="prompt-number">01</div><div class="prompt-question">When during the day does your energy feel most natural?</div><textarea class="response-area" data-key="s4_r1" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+          <div class="prompt-item"><div class="prompt-number">02</div><div class="prompt-question">When does it drop — not dramatically, but reliably?</div><textarea class="response-area" data-key="s4_r2" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+          <div class="prompt-item"><div class="prompt-number">03</div><div class="prompt-question">Where do you feel yourself pushing when you don't need to?</div><textarea class="response-area" data-key="s4_r3" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+          <div class="prompt-item"><div class="prompt-number">04</div><div class="prompt-question">What happens when you imagine moving at a slightly gentler pace?</div><textarea class="response-area" data-key="s4_r4" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+        </div>
+
+        <div class="tab-exercise-card">
+          <div class="tab-exercise-meta">Chapter 10 · Energy Economics</div>
+          <div class="tab-exercise-context">Exploring patterns once energy becomes visible — what costs more than it gives.</div>
+          <div class="prompt-item"><div class="prompt-number">01</div><div class="prompt-question">Which moment costs more energy than it deserves?</div><textarea class="response-area" data-key="c10_r1" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+          <div class="prompt-item"><div class="prompt-number">02</div><div class="prompt-question">What expectation keeps that pattern in place?</div><textarea class="response-area" data-key="c10_r2" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+          <div class="prompt-item"><div class="prompt-number">03</div><div class="prompt-question">What changes when you treat energy as information?</div><textarea class="response-area" data-key="c10_r3" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+        </div>
+
+        <div class="tab-exercise-card">
+          <div class="tab-exercise-meta">Chapter 11 · Rest as Strategy</div>
+          <div class="tab-exercise-context">Noticing where rest is usually delayed or resisted — the beliefs that shape when you allow recovery.</div>
+          <div class="prompt-item"><div class="prompt-number">01</div><div class="prompt-question">Where do you usually push instead of pause?</div><textarea class="response-area" data-key="c11_r1" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+          <div class="prompt-item"><div class="prompt-number">02</div><div class="prompt-question">What belief makes rest feel inconvenient?</div><textarea class="response-area" data-key="c11_r2" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+          <div class="prompt-item"><div class="prompt-number">03</div><div class="prompt-question">What changes when rest becomes preventative rather than reactive?</div><textarea class="response-area" data-key="c11_r3" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+        </div>
+
+        <div class="tab-exercise-card">
+          <div class="tab-exercise-meta">Chapter 12 · Momentum Over Motivation</div>
+          <div class="tab-exercise-context">Exploring what supports continuity and what quietly interrupts it — noticing conditions, not judging consistency.</div>
+          <div class="prompt-item"><div class="prompt-number">01</div><div class="prompt-question">What makes this action easy to return to?</div><textarea class="response-area" data-key="c12_r1" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+          <div class="prompt-item"><div class="prompt-number">02</div><div class="prompt-question">What usually breaks your momentum?</div><textarea class="response-area" data-key="c12_r2" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+          <div class="prompt-item"><div class="prompt-number">03</div><div class="prompt-question">What shifts when you keep the loop alive?</div><textarea class="response-area" data-key="c12_r3" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+        </div>
+
+        <div class="tab-stage-label">Stage 5 — Rise · Before You Begin</div>
+        <div class="tab-exercise-card">
+          <div class="tab-exercise-context">Before Stage 5 — locating your centre, noticing where you respond from.</div>
+          <div class="prompt-item"><div class="prompt-number">01</div><div class="prompt-question">When do you feel most grounded in yourself?</div><textarea class="response-area" data-key="s5_r1" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+          <div class="prompt-item"><div class="prompt-number">02</div><div class="prompt-question">What situations tend to pull you off-centre?</div><textarea class="response-area" data-key="s5_r2" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+          <div class="prompt-item"><div class="prompt-number">03</div><div class="prompt-question">How do you usually respond when your calm is challenged?</div><textarea class="response-area" data-key="s5_r3" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+          <div class="prompt-item"><div class="prompt-number">04</div><div class="prompt-question">What changes when you imagine responding more slowly?</div><textarea class="response-area" data-key="s5_r4" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+        </div>
+
+        <div class="tab-exercise-card">
+          <div class="tab-exercise-meta">Chapter 13 · Emotional Agility</div>
+          <div class="tab-exercise-context">Recognising which emotions are most likely to take over your response — and what helps you return to steadiness.</div>
+          <div class="prompt-item"><div class="prompt-number">01</div><div class="prompt-question">Which emotions tend to hijack your response most quickly?</div><textarea class="response-area" data-key="c13_r1" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+          <div class="prompt-item"><div class="prompt-number">02</div><div class="prompt-question">What helps you return to centre once you notice that shift?</div><textarea class="response-area" data-key="c13_r2" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+          <div class="prompt-item"><div class="prompt-number">03</div><div class="prompt-question">What changes when you allow emotion without acting on it?</div><textarea class="response-area" data-key="c13_r3" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+        </div>
+
+        <div class="tab-exercise-card">
+          <div class="tab-exercise-meta">Chapter 14 · Boundaries as Leadership</div>
+          <div class="tab-exercise-context">Noticing where boundaries soften and what makes holding them feel uncomfortable.</div>
+          <div class="prompt-item"><div class="prompt-number">01</div><div class="prompt-question">Where do your boundaries soften too quickly?</div><textarea class="response-area" data-key="c14_r1" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+          <div class="prompt-item"><div class="prompt-number">02</div><div class="prompt-question">What emotion makes holding them feel uncomfortable?</div><textarea class="response-area" data-key="c14_r2" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+          <div class="prompt-item"><div class="prompt-number">03</div><div class="prompt-question">What does this boundary protect?</div><textarea class="response-area" data-key="c14_r3" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+        </div>
+
+        <div class="tab-exercise-card">
+          <div class="tab-exercise-meta">Chapter 15 · Presence and Impact</div>
+          <div class="tab-exercise-context">Noticing how your presence already lands — and where it could be trusted more.</div>
+          <div class="prompt-item"><div class="prompt-number">01</div><div class="prompt-question">When do others seem most receptive to you?</div><textarea class="response-area" data-key="c15_r1" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+          <div class="prompt-item"><div class="prompt-number">02</div><div class="prompt-question">What happens to your presence when you're rushed or unheard?</div><textarea class="response-area" data-key="c15_r2" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+          <div class="prompt-item"><div class="prompt-number">03</div><div class="prompt-question">What would change if you trusted your calm more deliberately?</div><textarea class="response-area" data-key="c15_r3" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+        </div>
+
+        <div class="tab-stage-label">Stage 6 — Rhythm · Before You Begin</div>
+        <div class="tab-exercise-card">
+          <div class="tab-exercise-context">Before Stage 6 — noticing where you are right now. Not where you should be.</div>
+          <div class="prompt-item"><div class="prompt-number">01</div><div class="prompt-question">What helps you return to yourself most reliably?</div><textarea class="response-area" data-key="s6_r1" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+          <div class="prompt-item"><div class="prompt-number">02</div><div class="prompt-question">What pulls you off-centre — not catastrophically, but gradually?</div><textarea class="response-area" data-key="s6_r2" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+          <div class="prompt-item"><div class="prompt-number">03</div><div class="prompt-question">How do you usually know you're drifting?</div><textarea class="response-area" data-key="s6_r3" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+          <div class="prompt-item"><div class="prompt-number">04</div><div class="prompt-question">What supports you in coming back?</div><textarea class="response-area" data-key="s6_r4" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+        </div>
+
+        <div class="tab-exercise-card">
+          <div class="tab-exercise-meta">Chapter 16 · Rituals of Recalibration</div>
+          <div class="tab-exercise-context">Exploring why certain rituals feel grounding — what makes them easy to return to.</div>
+          <div class="prompt-item"><div class="prompt-number">01</div><div class="prompt-question">Which rituals feel grounding rather than effortful?</div><textarea class="response-area" data-key="c16_r1" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+          <div class="prompt-item"><div class="prompt-number">02</div><div class="prompt-question">What makes them easy to return to?</div><textarea class="response-area" data-key="c16_r2" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+          <div class="prompt-item"><div class="prompt-number">03</div><div class="prompt-question">What happens when you trust these small anchors?</div><textarea class="response-area" data-key="c16_r3" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+        </div>
+
+        <div class="tab-exercise-card">
+          <div class="tab-exercise-meta">Chapter 17 · Rest as Continuity</div>
+          <div class="tab-exercise-context">Noticing where rest is delayed or made conditional — and the beliefs that shape when you allow recovery.</div>
+          <div class="prompt-item"><div class="prompt-number">01</div><div class="prompt-question">Where do you wait too long to rest?</div><textarea class="response-area" data-key="c17_r1" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+          <div class="prompt-item"><div class="prompt-number">02</div><div class="prompt-question">What belief makes rest feel conditional?</div><textarea class="response-area" data-key="c17_r2" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+          <div class="prompt-item"><div class="prompt-number">03</div><div class="prompt-question">What changes when recovery becomes ordinary?</div><textarea class="response-area" data-key="c17_r3" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+        </div>
+
+        <div class="tab-exercise-card">
+          <div class="tab-exercise-meta">Chapter 18 · Micro-Pauses & Grounding</div>
+          <div class="tab-exercise-context">Noticing what changes when you pause — even briefly. Paying attention to how your body responds to space.</div>
+          <div class="prompt-item"><div class="prompt-number">01</div><div class="prompt-question">What changed when you paused — even briefly?</div><textarea class="response-area" data-key="c18_r1" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+          <div class="prompt-item"><div class="prompt-number">02</div><div class="prompt-question">Did anything feel clearer, steadier, or less effortful?</div><textarea class="response-area" data-key="c18_r2" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+          <div class="prompt-item"><div class="prompt-number">03</div><div class="prompt-question">What does your body need more of: speed, or space?</div><textarea class="response-area" data-key="c18_r3" placeholder="Write here…" oninput="saveResponse(this)"></textarea></div>
+        </div>
+
+        <div style="border-top:1px solid var(--stone);margin-top:48px;padding-top:32px;text-align:center;">
+          <button class="export-btn" onclick="exportAll()">Export All Responses</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  const questions = {
+    // Stage 1 — Fog
+    s1_r1: { stage: "Stage 1 — Fog", type: "reflection", q: "Where does something in your life feel slightly off?" },
+    s1_r2: { stage: "Stage 1 — Fog", type: "reflection", q: "Where are you continuing out of habit rather than desire?" },
+    s1_r3: { stage: "Stage 1 — Fog", type: "reflection", q: "Where does \"fine\" feel thinner than it used to?" },
+    s1_r4: { stage: "Stage 1 — Fog", type: "reflection", q: "What part of you has been asking for your attention?" },
+    s1_r5: { stage: "Stage 1 — Fog", type: "reflection", q: "What have you been avoiding naming?" },
+    c1_try_a: { stage: "Ch.1 — The Myth of Midlife Decline", type: "trythis", q: "Version A: The Inherited Script" },
+    c1_try_b: { stage: "Ch.1 — The Myth of Midlife Decline", type: "trythis", q: "Version B: Your Lived Truth" },
+    c1_r1: { stage: "Ch.1 — The Myth of Midlife Decline", type: "reflection", q: "What beliefs about this stage feel heavy or limiting?" },
+    c1_r2: { stage: "Ch.1 — The Myth of Midlife Decline", type: "reflection", q: "What possibility feels quietly interesting?" },
+    c1_r3: { stage: "Ch.1 — The Myth of Midlife Decline", type: "reflection", q: "What changes when you stop treating this as an ending?" },
+    c2_t1a: { stage: "Ch.2 — The Comfort Zone Trap", type: "trythis", q: "Autopilot Routine 1" },
+    c2_t1b: { stage: "Ch.2 — The Comfort Zone Trap", type: "trythis", q: "What keeps it in place (1)" },
+    c2_t1c: { stage: "Ch.2 — The Comfort Zone Trap", type: "trythis", q: "A 5% shift (1)" },
+    c2_t2a: { stage: "Ch.2 — The Comfort Zone Trap", type: "trythis", q: "Autopilot Routine 2" },
+    c2_t2b: { stage: "Ch.2 — The Comfort Zone Trap", type: "trythis", q: "What keeps it in place (2)" },
+    c2_t2c: { stage: "Ch.2 — The Comfort Zone Trap", type: "trythis", q: "A 5% shift (2)" },
+    c2_t3a: { stage: "Ch.2 — The Comfort Zone Trap", type: "trythis", q: "Autopilot Routine 3" },
+    c2_t3b: { stage: "Ch.2 — The Comfort Zone Trap", type: "trythis", q: "What keeps it in place (3)" },
+    c2_t3c: { stage: "Ch.2 — The Comfort Zone Trap", type: "trythis", q: "A 5% shift (3)" },
+    c2_r1: { stage: "Ch.2 — The Comfort Zone Trap", type: "reflection", q: "Where does repetition feel dull rather than grounding?" },
+    c2_r2: { stage: "Ch.2 — The Comfort Zone Trap", type: "reflection", q: "What responsibility are you carrying simply because you always have?" },
+    c2_r3: { stage: "Ch.2 — The Comfort Zone Trap", type: "reflection", q: "What small risk feels quietly relieving to imagine?" },
+    c3_try_a: { stage: "Ch.3 — Meeting Your Inner Voice", type: "trythis", q: "\"What are you trying to protect me from?\"" },
+    c3_try_b: { stage: "Ch.3 — Meeting Your Inner Voice", type: "trythis", q: "What does this voice need to hear from you now?" },
+    c3_try_c: { stage: "Ch.3 — Meeting Your Inner Voice", type: "trythis", q: "What do you notice shifts?" },
+    c3_r1: { stage: "Ch.3 — Meeting Your Inner Voice", type: "reflection", q: "When does your inner voice speak the loudest?" },
+    c3_r2: { stage: "Ch.3 — Meeting Your Inner Voice", type: "reflection", q: "What tone does it usually use?" },
+    c3_r3: { stage: "Ch.3 — Meeting Your Inner Voice", type: "reflection", q: "What does it seem most concerned about losing?" },
+    // Stage 2 — Filter
+    s2_r1: { stage: "Stage 2 — Filter", type: "reflection", q: "What currently takes up more mental space than it deserves?" },
+    s2_r2: { stage: "Stage 2 — Filter", type: "reflection", q: "Which expectations feel inherited rather than chosen?" },
+    s2_r3: { stage: "Stage 2 — Filter", type: "reflection", q: "Where do you feel mentally crowded or overstimulated?" },
+    s2_r4: { stage: "Stage 2 — Filter", type: "reflection", q: "What happens in your body when you imagine a little less input?" },
+    c4_try_a: { stage: "Ch.4 — Mindfulness", type: "trythis", q: "Right now, what is your mind doing?" },
+    c4_try_b: { stage: "Ch.4 — Mindfulness", type: "trythis", q: "Where does it go most often when left unattended?" },
+    c4_try_c: { stage: "Ch.4 — Mindfulness", type: "trythis", q: "What would change if you redirected it, gently, just once today?" },
+    c4_r1: { stage: "Ch.4 — Mindfulness", type: "reflection", q: "Where does your attention feel most scattered?" },
+    c4_r2: { stage: "Ch.4 — Mindfulness", type: "reflection", q: "What pulls you out of the present moment most reliably?" },
+    c4_r3: { stage: "Ch.4 — Mindfulness", type: "reflection", q: "What changes when you notice where your mind has gone, without judging it?" },
+    c5_try_a: { stage: "Ch.5 — The Quiet No", type: "trythis", q: "What is being asked of you?" },
+    c5_try_b: { stage: "Ch.5 — The Quiet No", type: "trythis", q: "Your simple response — one sentence" },
+    c5_try_c: { stage: "Ch.5 — The Quiet No", type: "trythis", q: "What happened — in your body, in the situation?" },
+    c5_r1: { stage: "Ch.5 — The Quiet No", type: "reflection", q: "Where does saying yes feel automatic rather than intentional?" },
+    c5_r2: { stage: "Ch.5 — The Quiet No", type: "reflection", q: "What emotion comes up when you imagine not responding immediately?" },
+    c5_r3: { stage: "Ch.5 — The Quiet No", type: "reflection", q: "What did this small boundary protect?" },
+    c6_try_a: { stage: "Ch.6 — White Space", type: "trythis", q: "Remove one thing" },
+    c6_try_b: { stage: "Ch.6 — White Space", type: "trythis", q: "Notice your body's response" },
+    c6_try_c: { stage: "Ch.6 — White Space", type: "trythis", q: "Capture what shifted" },
+    c6_r1: { stage: "Ch.6 — White Space", type: "reflection", q: "Which kind of noise drains you fastest?" },
+    c6_r2: { stage: "Ch.6 — White Space", type: "reflection", q: "Where do you crave more breathing room?" },
+    c6_r3: { stage: "Ch.6 — White Space", type: "reflection", q: "What does clarity feel like in your body?" },
+    // Stage 3 — Focus
+    s3_r1: { stage: "Stage 3 — Focus", type: "reflection", q: "What activities or moments reliably bring you back to yourself?" },
+    s3_r2: { stage: "Stage 3 — Focus", type: "reflection", q: "Where does your energy drain without giving much in return?" },
+    s3_r3: { stage: "Stage 3 — Focus", type: "reflection", q: "What feels aligned in your life right now?" },
+    s3_r4: { stage: "Stage 3 — Focus", type: "reflection", q: "What feels inherited rather than chosen?" },
+    c7_try_a: { stage: "Ch.7 — Core Values", type: "trythis", q: "A recent decision — what value is underneath it?" },
+    c7_try_b: { stage: "Ch.7 — Core Values", type: "trythis", q: "Something you repeatedly protect — what value does that reflect?" },
+    c7_try_c: { stage: "Ch.7 — Core Values", type: "trythis", q: "Where does life feel most misaligned?" },
+    c7_r1: { stage: "Ch.7 — Core Values", type: "reflection", q: "Which of your values feels most neglected right now?" },
+    c7_r2: { stage: "Ch.7 — Core Values", type: "reflection", q: "Where are you living most closely in line with what matters?" },
+    c7_r3: { stage: "Ch.7 — Core Values", type: "reflection", q: "What would change if one neglected value received more attention?" },
+    c8_try_a: { stage: "Ch.8 — Intentional Goals", type: "trythis", q: "Name the goal or direction" },
+    c8_try_b: { stage: "Ch.8 — Intentional Goals", type: "trythis", q: "Does this energise or drain? For now or who I used to be?" },
+    c8_try_c: { stage: "Ch.8 — Intentional Goals", type: "trythis", q: "Would I pursue this if no one expected anything of me?" },
+    c8_r1: { stage: "Ch.8 — Intentional Goals", type: "reflection", q: "What goals no longer reflect who you are?" },
+    c8_r2: { stage: "Ch.8 — Intentional Goals", type: "reflection", q: "What direction feels lighter — even if less impressive?" },
+    c8_r3: { stage: "Ch.8 — Intentional Goals", type: "reflection", q: "What would change if you allowed yourself to want less, but more honestly?" },
+    c9_try_a: { stage: "Ch.9 — Reframing Self-Doubt", type: "trythis", q: "The doubt says…" },
+    c9_try_b: { stage: "Ch.9 — Reframing Self-Doubt", type: "trythis", q: "It might be trying to protect me from…" },
+    c9_try_c: { stage: "Ch.9 — Reframing Self-Doubt", type: "trythis", q: "What I actually need right now is…" },
+    c9_r1: { stage: "Ch.9 — Reframing Self-Doubt", type: "reflection", q: "When does self-doubt tend to appear most strongly?" },
+    c9_r2: { stage: "Ch.9 — Reframing Self-Doubt", type: "reflection", q: "What does it seem most concerned about?" },
+    c9_r3: { stage: "Ch.9 — Reframing Self-Doubt", type: "reflection", q: "What changes when you treat doubt as information rather than instruction?" },
+    // Stage 4 — Flow
+    s4_r1: { stage: "Stage 4 — Flow", type: "reflection", q: "When during the day does your energy feel most natural?" },
+    s4_r2: { stage: "Stage 4 — Flow", type: "reflection", q: "When does it drop — not dramatically, but reliably?" },
+    s4_r3: { stage: "Stage 4 — Flow", type: "reflection", q: "Where do you feel yourself pushing when you don't need to?" },
+    s4_r4: { stage: "Stage 4 — Flow", type: "reflection", q: "What happens when you imagine moving at a slightly gentler pace?" },
+    c10_t1a: { stage: "Ch.10 — Energy Economics", type: "trythis", q: "Morning — what you do" },
+    c10_t1b: { stage: "Ch.10 — Energy Economics", type: "trythis", q: "Morning — effect" },
+    c10_t1c: { stage: "Ch.10 — Energy Economics", type: "trythis", q: "Morning — adjustment" },
+    c10_t2a: { stage: "Ch.10 — Energy Economics", type: "trythis", q: "Midday — what you do" },
+    c10_t2b: { stage: "Ch.10 — Energy Economics", type: "trythis", q: "Midday — effect" },
+    c10_t2c: { stage: "Ch.10 — Energy Economics", type: "trythis", q: "Midday — adjustment" },
+    c10_t3a: { stage: "Ch.10 — Energy Economics", type: "trythis", q: "Evening — what you do" },
+    c10_t3b: { stage: "Ch.10 — Energy Economics", type: "trythis", q: "Evening — effect" },
+    c10_t3c: { stage: "Ch.10 — Energy Economics", type: "trythis", q: "Evening — adjustment" },
+    c10_r1: { stage: "Ch.10 — Energy Economics", type: "reflection", q: "Which moment costs more energy than it deserves?" },
+    c10_r2: { stage: "Ch.10 — Energy Economics", type: "reflection", q: "What expectation keeps that pattern in place?" },
+    c10_r3: { stage: "Ch.10 — Energy Economics", type: "reflection", q: "What changes when you treat energy as information?" },
+    c11_try_a: { stage: "Ch.11 — Rest as Strategy", type: "trythis", q: "Name the moment where your energy dips" },
+    c11_try_b: { stage: "Ch.11 — Rest as Strategy", type: "trythis", q: "Pause — what do you notice?" },
+    c11_try_c: { stage: "Ch.11 — Rest as Strategy", type: "trythis", q: "Continue — notice if anything feels different" },
+    c11_r1: { stage: "Ch.11 — Rest as Strategy", type: "reflection", q: "Where do you usually push instead of pause?" },
+    c11_r2: { stage: "Ch.11 — Rest as Strategy", type: "reflection", q: "What belief makes rest feel inconvenient?" },
+    c11_r3: { stage: "Ch.11 — Rest as Strategy", type: "reflection", q: "What changes when rest becomes preventative rather than reactive?" },
+    c12_t1a: { stage: "Ch.12 — Momentum", type: "trythis", q: "One action under 2 minutes" },
+    c12_t1b: { stage: "Ch.12 — Momentum", type: "trythis", q: "Something to link it to" },
+    c12_insights: { stage: "Ch.12 — Momentum", type: "trythis", q: "Insights after one week" },
+    c12_r1: { stage: "Ch.12 — Momentum", type: "reflection", q: "What makes this action easy to return to?" },
+    c12_r2: { stage: "Ch.12 — Momentum", type: "reflection", q: "What usually breaks your momentum?" },
+    c12_r3: { stage: "Ch.12 — Momentum", type: "reflection", q: "What shifts when you keep the loop alive?" },
+    // Stage 5 — Rise
+    s5_r1: { stage: "Stage 5 — Rise", type: "reflection", q: "When do you feel most grounded in yourself?" },
+    s5_r2: { stage: "Stage 5 — Rise", type: "reflection", q: "What situations tend to pull you off-centre?" },
+    s5_r3: { stage: "Stage 5 — Rise", type: "reflection", q: "How do you usually respond when your calm is challenged?" },
+    s5_r4: { stage: "Stage 5 — Rise", type: "reflection", q: "What changes when you imagine responding more slowly?" },
+    c13_try_a: { stage: "Ch.13 — Emotional Agility", type: "trythis", q: "Describe the moment — what happened?" },
+    c13_try_b: { stage: "Ch.13 — Emotional Agility", type: "trythis", q: "Name the emotion specifically" },
+    c13_try_c: { stage: "Ch.13 — Emotional Agility", type: "trythis", q: "What grounded response was available?" },
+    c13_r1: { stage: "Ch.13 — Emotional Agility", type: "reflection", q: "Which emotions tend to hijack your response most quickly?" },
+    c13_r2: { stage: "Ch.13 — Emotional Agility", type: "reflection", q: "What helps you return to centre once you notice that shift?" },
+    c13_r3: { stage: "Ch.13 — Emotional Agility", type: "reflection", q: "What changes when you allow emotion without acting on it?" },
+    c14_try_a: { stage: "Ch.14 — Boundaries", type: "trythis", q: "Name the moment — what is being asked?" },
+    c14_try_b: { stage: "Ch.14 — Boundaries", type: "trythis", q: "Your limit — one sentence, no justification" },
+    c14_try_c: { stage: "Ch.14 — Boundaries", type: "trythis", q: "Notice the impact" },
+    c14_r1: { stage: "Ch.14 — Boundaries", type: "reflection", q: "Where do your boundaries soften too quickly?" },
+    c14_r2: { stage: "Ch.14 — Boundaries", type: "reflection", q: "What emotion makes holding them feel uncomfortable?" },
+    c14_r3: { stage: "Ch.14 — Boundaries", type: "reflection", q: "What does this boundary protect?" },
+    c15_try_a: { stage: "Ch.15 — Presence and Impact", type: "trythis", q: "A recent moment when you felt genuinely present" },
+    c15_try_b: { stage: "Ch.15 — Presence and Impact", type: "trythis", q: "What made that possible?" },
+    c15_try_c: { stage: "Ch.15 — Presence and Impact", type: "trythis", q: "What would it take to create those conditions more often?" },
+    c15_r1: { stage: "Ch.15 — Presence and Impact", type: "reflection", q: "When do others seem most receptive to you?" },
+    c15_r2: { stage: "Ch.15 — Presence and Impact", type: "reflection", q: "What happens to your presence when you're rushed or unheard?" },
+    c15_r3: { stage: "Ch.15 — Presence and Impact", type: "reflection", q: "What would change if you trusted your calm more deliberately?" },
+    // Stage 6 — Rhythm
+    s6_r1: { stage: "Stage 6 — Rhythm", type: "reflection", q: "What helps you return to yourself most reliably?" },
+    s6_r2: { stage: "Stage 6 — Rhythm", type: "reflection", q: "What pulls you off-centre — gradually?" },
+    s6_r3: { stage: "Stage 6 — Rhythm", type: "reflection", q: "How do you usually know you're drifting?" },
+    s6_r4: { stage: "Stage 6 — Rhythm", type: "reflection", q: "What supports you in coming back?" },
+    c16_try_a: { stage: "Ch.16 — Rituals", type: "trythis", q: "Moments that already help you reset" },
+    c16_try_b: { stage: "Ch.16 — Rituals", type: "trythis", q: "Choose one — describe it briefly" },
+    c16_try_c: { stage: "Ch.16 — Rituals", type: "trythis", q: "Notice how little explanation it needs" },
+    c16_r1: { stage: "Ch.16 — Rituals", type: "reflection", q: "Which rituals feel grounding rather than effortful?" },
+    c16_r2: { stage: "Ch.16 — Rituals", type: "reflection", q: "What makes them easy to return to?" },
+    c16_r3: { stage: "Ch.16 — Rituals", type: "reflection", q: "What happens when you trust these small anchors?" },
+    c17_try_a: { stage: "Ch.17 — Rest as Continuity", type: "trythis", q: "One moment where you can soften, slightly" },
+    c17_try_b: { stage: "Ch.17 — Rest as Continuity", type: "trythis", q: "Do it once — notice if anything shifts" },
+    c17_try_c: { stage: "Ch.17 — Rest as Continuity", type: "trythis", q: "What did ordinary rest feel like?" },
+    c17_r1: { stage: "Ch.17 — Rest as Continuity", type: "reflection", q: "Where do you wait too long to rest?" },
+    c17_r2: { stage: "Ch.17 — Rest as Continuity", type: "reflection", q: "What belief makes rest feel conditional?" },
+    c17_r3: { stage: "Ch.17 — Rest as Continuity", type: "reflection", q: "What changes when recovery becomes ordinary?" },
+    c18_try_a: { stage: "Ch.18 — Micro-Pauses", type: "trythis", q: "Where do you tend to move too quickly?" },
+    c18_try_b: { stage: "Ch.18 — Micro-Pauses", type: "trythis", q: "One moment in your day that happens often" },
+    c18_try_c: { stage: "Ch.18 — Micro-Pauses", type: "trythis", q: "One grounding action — what did you notice?" },
+    c18_r1: { stage: "Ch.18 — Micro-Pauses", type: "reflection", q: "What changed when you paused — even briefly?" },
+    c18_r2: { stage: "Ch.18 — Micro-Pauses", type: "reflection", q: "Did anything feel clearer, steadier, or less effortful?" },
+    c18_r3: { stage: "Ch.18 — Micro-Pauses", type: "reflection", q: "What does your body need more of: speed, or space?" },
+    // Final Chapter
+    final_a: { stage: "Final Chapter — Quiet Authority", type: "trythis", q: "Where do I feel less reactive than I once did?" },
+    final_b: { stage: "Final Chapter — Quiet Authority", type: "trythis", q: "What no longer requires the same effort to hold together?" },
+    final_c: { stage: "Final Chapter — Quiet Authority", type: "trythis", q: "Where have I stopped asking for permission?" },
+    final_d: { stage: "Final Chapter — Quiet Authority", type: "trythis", q: "What feels simpler now — because I am steadier?" },
+  };
+
+  const STORAGE_KEY = 'quietly_tough_responses';
+
+  function getData() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); }
+    catch(e) { return {}; }
+  }
+
+  function saveResponse(el) {
+    const key = el.dataset.key;
+    const data = getData();
+    data[key] = el.value;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    updateProgress();
+    flashSaved();
+  }
+
+  function loadResponses() {
+    const data = getData();
+    document.querySelectorAll('[data-key]').forEach(el => {
+      if (data[el.dataset.key]) el.value = data[el.dataset.key];
+    });
+    updateProgress();
+  }
+
+  let saveTimer;
+  function flashSaved() {
+    clearTimeout(saveTimer);
+    const s = document.getElementById('saveStatus');
+    s.classList.add('show');
+    saveTimer = setTimeout(() => s.classList.remove('show'), 2000);
+  }
+
+  function updateProgress() {
+    const data = getData();
+    const filled = Object.keys(questions).filter(k => data[k] && data[k].trim().length > 0).length;
+    const total = Object.keys(questions).length;
+    const pct = Math.round((filled / total) * 100);
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressLabel').textContent = `${filled} of ${total} responses · ${pct}% complete`;
+  }
+
+  function startApp() {
+    document.getElementById('splash').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    loadResponses();
+  }
+
+  function showSection(name) {
+    ['guide','trythis','reflections'].forEach(s => {
+      const el = document.getElementById('section-' + s);
+      if (el) el.style.display = name === s ? 'block' : 'none';
+      const btn = document.getElementById('btn-' + s);
+      if (btn) btn.classList.toggle('active', name === s);
+    });
+    if (name !== 'guide') loadResponses();
+  }
+
+  function exportAll() {
+    const data = getData();
+    let text = 'QUIETLY TOUGH — THE ART OF CALM STRENGTH\n';
+    text += 'Practice Guide — My Responses\n';
+    text += '=====================================\n\n';
+    let lastStage = '';
+    Object.keys(questions).forEach(key => {
+      const meta = questions[key];
+      const val = data[key] || '';
+      if (!val.trim()) return;
+      if (meta.stage !== lastStage) {
+        text += `\n── ${meta.stage.toUpperCase()} ──\n\n`;
+        lastStage = meta.stage;
+      }
+      text += `${meta.q}\n${val}\n\n`;
+    });
+    text += '\n— quietlytough.com —';
+    const blob = new Blob([text], { type: "text/plain" });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'quietly-tough-my-practice.txt';
+    a.click();
+  }
+
+  window.onload = () => {
+    const data = getData();
+    if (Object.keys(data).length > 0) {
+      document.getElementById('savedNote').textContent = 'Welcome back — your previous responses are saved ✓';
+    }
+  };
+</script>
+</body>
+</html>
