@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A browser-based Interactive Enquiry Guide for When Your Life Still Works — But No Longer Fits.">
+  <meta name="theme-color" content="#3d0f99">
+  <title>Interactive Enquiry Guide | When Your Life Still Works — But No Longer Fits</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233d0f99'/%3E%3Cpath d='M18 20h28M18 32h20M18 44h26' stroke='%23fff' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to the Guide</a>
+  <header class="site-header">
+    <div class="brand">
+      <span class="brand-kicker">Audrey Finch · Quietly Tough</span>
+      <span class="brand-title">Interactive Enquiry Guide</span>
+    </div>
+    <button id="menuButton" class="menu-button" type="button" aria-expanded="false" aria-controls="primaryNav">Menu</button>
+    <nav id="primaryNav" class="primary-nav" aria-label="Guide">
+      <button type="button" data-route="journey">Journey</button>
+      <button type="button" data-route="current">Current place</button>
+      <button type="button" data-route="enquiry">My Enquiry</button>
+      <button type="button" data-route="data">Export and data</button>
+    </nav>
+  </header>
+  <div id="saveStatus" class="save-status" role="status" aria-live="polite">Saved on this device</div>
+  <main id="main" tabindex="-1"></main>
+  <div id="focusOverlay" class="focus-overlay" hidden>
+    <section class="focus-panel" role="dialog" aria-modal="true" aria-labelledby="focusTitle">
+      <header>
+        <div>
+          <span class="eyebrow">Expanded writing space</span>
+          <h2 id="focusTitle"></h2>
+        </div>
+        <button id="closeFocus" type="button" class="button secondary">Close</button>
+      </header>
+      <label id="focusLabel" for="focusTextarea"></label>
+      <textarea id="focusTextarea"></textarea>
+    </section>
+  </div>
+  <script src="guide-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
